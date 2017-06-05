@@ -19,33 +19,32 @@ class GameView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        guard let table = scene?.table else {
+        guard let scene = scene else {
             return
         }
         
         // Set scene position to center of the view and adjust scale so that the table fits the screen
         scenePosition = ScenePosition(center: CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5),
-                                      scale: min((frame.size.width/table.radius) / 2, (frame.size.height/table.radius) / 2))
+                                      scale: min((frame.size.width/scene.table.radius) / 2, (frame.size.height/scene.table.radius) / 2))
         
         // Draw table
         UIColor.brown.setFill()
-        fillCircle(circle: table)
+        fillCircle(circle: scene.table)
         
         // Draw exits
         UIColor.black.setFill()
-        scene?.exits.forEach({ exit in
+        scene.exits.forEach({ exit in
             fillCircle(circle: exit)
         })
         
         // Draw coin
-        if let coin = scene?.coin {
-            UIColor.yellow.setFill()
-            fillCircle(circle: coin)
-        }
+        UIColor.yellow.setFill()
+        fillCircle(circle: scene.coin)
+        
         
         // Draw obstacles
         UIColor.blue.setFill()
-        scene?.obstacles.forEach({ obstacle in
+        scene.obstacles.forEach({ obstacle in
             fillCircle(circle: obstacle)
         })
         
