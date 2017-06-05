@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21706BC01EE5545E00408CC0 /* TableGolfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BBF1EE5545E00408CC0 /* TableGolfTests.swift */; };
+		21706BCB1EE5545E00408CC0 /* TableGolfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BCA1EE5545E00408CC0 /* TableGolfUITests.swift */; };
+		21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21706BD91EE555C900408CC0 /* Assets.xcassets */; };
+		21706BE31EE555C900408CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BDC1EE555C900408CC0 /* AppDelegate.swift */; };
+		21706BE41EE555C900408CC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21706BDF1EE555C900408CC0 /* LaunchScreen.storyboard */; };
+		21706BE51EE555C900408CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21706BE01EE555C900408CC0 /* Main.storyboard */; };
+		21706BE61EE555C900408CC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BE11EE555C900408CC0 /* ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21706BBC1EE5545E00408CC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21706B9F1EE5545E00408CC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21706BA61EE5545E00408CC0;
+			remoteInfo = TableGolf;
+		};
+		21706BC71EE5545E00408CC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21706B9F1EE5545E00408CC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21706BA61EE5545E00408CC0;
+			remoteInfo = TableGolf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		21706BA71EE5545E00408CC0 /* TableGolf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableGolf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21706BB61EE5545E00408CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21706BBB1EE5545E00408CC0 /* TableGolfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableGolfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21706BBF1EE5545E00408CC0 /* TableGolfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGolfTests.swift; sourceTree = "<group>"; };
+		21706BC11EE5545E00408CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21706BC61EE5545E00408CC0 /* TableGolfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableGolfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21706BCA1EE5545E00408CC0 /* TableGolfUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGolfUITests.swift; sourceTree = "<group>"; };
+		21706BCC1EE5545E00408CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21706BD91EE555C900408CC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		21706BDC1EE555C900408CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		21706BDF1EE555C900408CC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		21706BE01EE555C900408CC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		21706BE11EE555C900408CC0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21706BA41EE5545E00408CC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BB81EE5545E00408CC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BC31EE5545E00408CC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21706B9E1EE5545E00408CC0 = {
+			isa = PBXGroup;
+			children = (
+				21706BA91EE5545E00408CC0 /* TableGolf */,
+				21706BBE1EE5545E00408CC0 /* TableGolfTests */,
+				21706BC91EE5545E00408CC0 /* TableGolfUITests */,
+				21706BA81EE5545E00408CC0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		21706BA81EE5545E00408CC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21706BA71EE5545E00408CC0 /* TableGolf.app */,
+				21706BBB1EE5545E00408CC0 /* TableGolfTests.xctest */,
+				21706BC61EE5545E00408CC0 /* TableGolfUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21706BA91EE5545E00408CC0 /* TableGolf */ = {
+			isa = PBXGroup;
+			children = (
+				21706BD81EE555C900408CC0 /* Resources */,
+				21706BDA1EE555C900408CC0 /* Source */,
+				21706BB61EE5545E00408CC0 /* Info.plist */,
+			);
+			path = TableGolf;
+			sourceTree = "<group>";
+		};
+		21706BBE1EE5545E00408CC0 /* TableGolfTests */ = {
+			isa = PBXGroup;
+			children = (
+				21706BBF1EE5545E00408CC0 /* TableGolfTests.swift */,
+				21706BC11EE5545E00408CC0 /* Info.plist */,
+			);
+			path = TableGolfTests;
+			sourceTree = "<group>";
+		};
+		21706BC91EE5545E00408CC0 /* TableGolfUITests */ = {
+			isa = PBXGroup;
+			children = (
+				21706BCA1EE5545E00408CC0 /* TableGolfUITests.swift */,
+				21706BCC1EE5545E00408CC0 /* Info.plist */,
+			);
+			path = TableGolfUITests;
+			sourceTree = "<group>";
+		};
+		21706BD81EE555C900408CC0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21706BD91EE555C900408CC0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		21706BDA1EE555C900408CC0 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				21706BDB1EE555C900408CC0 /* Main */,
+				21706BDD1EE555C900408CC0 /* User Interface */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		21706BDB1EE555C900408CC0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				21706BDC1EE555C900408CC0 /* AppDelegate.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		21706BDD1EE555C900408CC0 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				21706BDE1EE555C900408CC0 /* Main */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		21706BDE1EE555C900408CC0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				21706BDF1EE555C900408CC0 /* LaunchScreen.storyboard */,
+				21706BE01EE555C900408CC0 /* Main.storyboard */,
+				21706BE11EE555C900408CC0 /* ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21706BA61EE5545E00408CC0 /* TableGolf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21706BCF1EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolf" */;
+			buildPhases = (
+				21706BA31EE5545E00408CC0 /* Sources */,
+				21706BA41EE5545E00408CC0 /* Frameworks */,
+				21706BA51EE5545E00408CC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TableGolf;
+			productName = TableGolf;
+			productReference = 21706BA71EE5545E00408CC0 /* TableGolf.app */;
+			productType = "com.apple.product-type.application";
+		};
+		21706BBA1EE5545E00408CC0 /* TableGolfTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21706BD21EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfTests" */;
+			buildPhases = (
+				21706BB71EE5545E00408CC0 /* Sources */,
+				21706BB81EE5545E00408CC0 /* Frameworks */,
+				21706BB91EE5545E00408CC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21706BBD1EE5545E00408CC0 /* PBXTargetDependency */,
+			);
+			name = TableGolfTests;
+			productName = TableGolfTests;
+			productReference = 21706BBB1EE5545E00408CC0 /* TableGolfTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		21706BC51EE5545E00408CC0 /* TableGolfUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21706BD51EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfUITests" */;
+			buildPhases = (
+				21706BC21EE5545E00408CC0 /* Sources */,
+				21706BC31EE5545E00408CC0 /* Frameworks */,
+				21706BC41EE5545E00408CC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21706BC81EE5545E00408CC0 /* PBXTargetDependency */,
+			);
+			name = TableGolfUITests;
+			productName = TableGolfUITests;
+			productReference = 21706BC61EE5545E00408CC0 /* TableGolfUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21706B9F1EE5545E00408CC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Jaka;
+				TargetAttributes = {
+					21706BA61EE5545E00408CC0 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4RJ9D66P45;
+						ProvisioningStyle = Automatic;
+					};
+					21706BBA1EE5545E00408CC0 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4RJ9D66P45;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 21706BA61EE5545E00408CC0;
+					};
+					21706BC51EE5545E00408CC0 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4RJ9D66P45;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 21706BA61EE5545E00408CC0;
+					};
+				};
+			};
+			buildConfigurationList = 21706BA21EE5545E00408CC0 /* Build configuration list for PBXProject "TableGolf" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 21706B9E1EE5545E00408CC0;
+			productRefGroup = 21706BA81EE5545E00408CC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				21706BA61EE5545E00408CC0 /* TableGolf */,
+				21706BBA1EE5545E00408CC0 /* TableGolfTests */,
+				21706BC51EE5545E00408CC0 /* TableGolfUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21706BA51EE5545E00408CC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21706BE51EE555C900408CC0 /* Main.storyboard in Resources */,
+				21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */,
+				21706BE41EE555C900408CC0 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BB91EE5545E00408CC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BC41EE5545E00408CC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21706BA31EE5545E00408CC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21706BE61EE555C900408CC0 /* ViewController.swift in Sources */,
+				21706BE31EE555C900408CC0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BB71EE5545E00408CC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21706BC01EE5545E00408CC0 /* TableGolfTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21706BC21EE5545E00408CC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21706BCB1EE5545E00408CC0 /* TableGolfUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21706BBD1EE5545E00408CC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21706BA61EE5545E00408CC0 /* TableGolf */;
+			targetProxy = 21706BBC1EE5545E00408CC0 /* PBXContainerItemProxy */;
+		};
+		21706BC81EE5545E00408CC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21706BA61EE5545E00408CC0 /* TableGolf */;
+			targetProxy = 21706BC71EE5545E00408CC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		21706BCD1EE5545E00408CC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		21706BCE1EE5545E00408CC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		21706BD01EE5545E00408CC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		21706BD11EE5545E00408CC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		21706BD31EE5545E00408CC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolfTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableGolf.app/TableGolf";
+			};
+			name = Debug;
+		};
+		21706BD41EE5545E00408CC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolfTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableGolf.app/TableGolf";
+			};
+			name = Release;
+		};
+		21706BD61EE5545E00408CC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolfUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolfUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TableGolf;
+			};
+			name = Debug;
+		};
+		21706BD71EE5545E00408CC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 4RJ9D66P45;
+				INFOPLIST_FILE = TableGolfUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = si.kamino.TableGolfUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TableGolf;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21706BA21EE5545E00408CC0 /* Build configuration list for PBXProject "TableGolf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21706BCD1EE5545E00408CC0 /* Debug */,
+				21706BCE1EE5545E00408CC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21706BCF1EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21706BD01EE5545E00408CC0 /* Debug */,
+				21706BD11EE5545E00408CC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		21706BD21EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21706BD31EE5545E00408CC0 /* Debug */,
+				21706BD41EE5545E00408CC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		21706BD51EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21706BD61EE5545E00408CC0 /* Debug */,
+				21706BD71EE5545E00408CC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21706B9F1EE5545E00408CC0 /* Project object */;
+}
