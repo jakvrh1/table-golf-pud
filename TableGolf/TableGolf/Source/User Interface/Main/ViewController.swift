@@ -9,15 +9,31 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet private weak var gameView: GameView?
+    
+// MARK: Game initialization
+    
+    private var scene: GameScene? = nil {
+        didSet {
+            gameView?.scene = scene
+            gameView?.setNeedsDisplay()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        scene = GameScene(withTutorialType: .basic)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        gameView?.setNeedsDisplay()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gameView?.setNeedsDisplay()
     }
 
 
