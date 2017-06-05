@@ -12,47 +12,68 @@ class GameView: UIView {
 
     var scene: GameScene?
     
+    private var scenePosition: ScenePosition = ScenePosition(center: CGPoint.zero, scale: 1.0)
+    
 // MARK: Drawing scene
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if let table = scene?.table {
-            UIColor.brown.setFill()
-            fillCircle(circle: table)
+        guard let table = scene?.table else {
+            return
         }
         
+        // Set scene position to center of the view and adjust scale so that the table fits the screen
+        scenePosition = ScenePosition(center: CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5),
+                                      scale: min((frame.size.width/table.radius) / 2, (frame.size.height/table.radius) / 2))
+        
+        // Draw table
+        UIColor.brown.setFill()
+        fillCircle(circle: table)
+        
+        // Draw exits
+        UIColor.black.setFill()
         scene?.exits.forEach({ exit in
-            UIColor.black.setFill()
             fillCircle(circle: exit)
         })
         
+        // Draw coin
         if let coin = scene?.coin {
             UIColor.yellow.setFill()
             fillCircle(circle: coin)
         }
         
+        // Draw obstacles
+        UIColor.blue.setFill()
         scene?.obstacles.forEach({ obstacle in
-            UIColor.blue.setFill()
             fillCircle(circle: obstacle)
         })
         
     }
-
+    
     private func fillCircle(circle: Circle) {
-        guard let table = scene?.table else {
-            return
-        }
-        
-        let offset: CGPoint = CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5)
-        let scale: CGFloat = min((frame.size.width/table.radius) / 2, (frame.size.height/table.radius) / 2)
-        
-        let path = UIBezierPath(ovalIn: CGRect(x: offset.x + (circle.center.x - circle.radius)*scale,
-                                               y: offset.y + (circle.center.y - circle.radius)*scale,
-                                               width: 2 * circle.radius * scale,
-                                               height: 2 * circle.radius * scale))
+        let path = UIBezierPath(ovalIn: scenePosition.frame(forCircle: circle))
         path.fill()
     }
     
 }
 
+// MARK: - Screen position
+
+fileprivate extension GameView {
+    
+    struct ScenePosition {
+        
+        var center: CGPoint
+        var scale: CGFloat
+        
+        func frame(forCircle circle: Circle) -> CGRect {
+            return CGRect(x: center.x + (circle.center.x - circle.radius) * scale,
+                          y: center.y + (circle.center.y - circle.radius) * scale,
+                          width: 2 * circle.radius * scale,
+                          height: 2 * circle.radius * scale)
+        }
+        
+    }
+    
+}
