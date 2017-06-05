@@ -21,6 +21,7 @@
 		21706BFE1EE559F000408CC0 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BFD1EE559F000408CC0 /* Obstacle.swift */; };
 		21706C001EE559FC00408CC0 /* Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BFF1EE559FC00408CC0 /* Exit.swift */; };
 		21706C021EE55A0B00408CC0 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706C011EE55A0B00408CC0 /* Coin.swift */; };
+		21706C071EE5713400408CC0 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706C061EE5713400408CC0 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		21706BFD1EE559F000408CC0 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		21706BFF1EE559FC00408CC0 /* Exit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exit.swift; sourceTree = "<group>"; };
 		21706C011EE55A0B00408CC0 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		21706C061EE5713400408CC0 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		21706BDD1EE555C900408CC0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				21706C031EE56FA300408CC0 /* GameView */,
 				21706BDE1EE555C900408CC0 /* Main */,
 			);
 			path = "User Interface";
@@ -200,6 +203,14 @@
 				21706C011EE55A0B00408CC0 /* Coin.swift */,
 			);
 			path = "Game objects";
+			sourceTree = "<group>";
+		};
+		21706C031EE56FA300408CC0 /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				21706C061EE5713400408CC0 /* GameView.swift */,
+			);
+			path = GameView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +354,7 @@
 				21706BFE1EE559F000408CC0 /* Obstacle.swift in Sources */,
 				21706BFC1EE559DD00408CC0 /* Table.swift in Sources */,
 				21706BF11EE5591B00408CC0 /* GameScene.swift in Sources */,
+				21706C071EE5713400408CC0 /* GameView.swift in Sources */,
 				21706BFA1EE559A200408CC0 /* GameObject.swift in Sources */,
 				21706BE61EE555C900408CC0 /* ViewController.swift in Sources */,
 				21706BE31EE555C900408CC0 /* AppDelegate.swift in Sources */,
@@ -581,6 +593,7 @@
 				21706BD11EE5545E00408CC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21706BD21EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfTests" */ = {
 			isa = XCConfigurationList;
@@ -589,6 +602,7 @@
 				21706BD41EE5545E00408CC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21706BD51EE5545E00408CC0 /* Build configuration list for PBXNativeTarget "TableGolfUITests" */ = {
 			isa = XCConfigurationList;
@@ -597,6 +611,7 @@
 				21706BD71EE5545E00408CC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

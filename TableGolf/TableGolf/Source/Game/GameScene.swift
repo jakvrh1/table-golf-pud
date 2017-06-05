@@ -28,10 +28,10 @@ class GameScene: GameObject {
             coin = Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4)
             exits = [Exit(withCenter: CGPoint(x: -90, y: 0), andRadius: 10)]
             obstacles = [
-                Obstacle(withCenter: CGPoint(x: -45, y: 0), andRadius: 8),
-                Obstacle(withCenter: CGPoint(x: -45, y: 45), andRadius: 8),
-                Obstacle(withCenter: CGPoint(x: 0, y: 45), andRadius: 8),
-                Obstacle(withCenter: CGPoint(x: -80, y: -60), andRadius: 8),
+                Obstacle(withCenter: CGPoint(x: cos(CGFloat.pi*2 * 0.0) * table.radius*0.7, y: sin(CGFloat.pi*2 * 0.0) * table.radius*0.7), andRadius: 8),
+                Obstacle(withCenter: CGPoint(x: cos(CGFloat.pi*2 * 0.3) * table.radius*0.7, y: sin(CGFloat.pi*2 * 0.3) * table.radius*0.7), andRadius: 12),
+                Obstacle(withCenter: CGPoint(x: cos(CGFloat.pi*2 * 0.5) * table.radius*0.2, y: sin(CGFloat.pi*2 * 0.5) * table.radius*0.2), andRadius: 10),
+                Obstacle(withCenter: CGPoint(x: cos(CGFloat.pi*2 * 0.8) * table.radius*0.5, y: sin(CGFloat.pi*2 * 0.8) * table.radius*0.5), andRadius: 9),
             ]
         }
         
@@ -48,3 +48,4 @@ extension GameScene {
     }
     
 }
+
