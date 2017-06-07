@@ -29,6 +29,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         scene = GameScene(withTutorialType: .lvl1)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
+        gameView?.cameraMode = .fullScene
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(onDisplayLink))
+        displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+    }
+    
+    @objc func onDisplayLink() {
+        scene?.move(dt: 1.0/60.0)
+        gameView?.setNeedsDisplay()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +54,10 @@ class ViewController: UIViewController {
     
     // MARK: Game gestures
     @objc private func onPanGesture(sender: UIGestureRecognizer) {
+        guard scene?.canLaunch == true else {
+            return
+        }
+        
         switch sender.state {
         case .began:
             arrowStartLocation = sender.location(in: gameView)

@@ -15,17 +15,23 @@ class GameScene: GameObject {
     var obstacles = [Obstacle]()
     var exits = [Exit]()
     var table: Table = Table(withCenter: CGPoint.zero, andRadius: 10)
-    var coin: Coin = Coin(withCenter: CGPoint.zero, andRadius: 1)
+    var coin: Coin = Coin(withCenter: CGPoint.zero, andRadius: 1) {
+        didSet {
+            coin.delegate = self
+        }
+    }
     
+    fileprivate(set) var canLaunch: Bool = true
     private(set) var isReadyToLaunch: Bool = false // Set to true when dragging
     /// Will always be normalized
-    private(set) var launchDirection: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    private(set) var launchDirection: CGPoint = CGPoint(x: 1.0, y: 1.0)
     private(set) var launchMagnitude: CGFloat = 0.0
+    private var directionLenght: CGFloat = 0.0
     private let magnitudeThreshold: CGFloat = 0.3
     
     func setLaunchParameters(withStartPoint start: CGPoint, endPoint end: CGPoint) {
         let direction = PointTools.substract(start, end)
-         let directionLenght = PointTools.length(direction)
+        directionLenght = PointTools.length(direction)
         
         launchDirection = PointTools.normalized(direction)
         
@@ -40,8 +46,19 @@ class GameScene: GameObject {
         }()
     }
     
+    func move(dt: TimeInterval) {
+        coin.move(dt: dt)
+    }
+    
     func launch() {
+        if !isReadyToLaunch {
+            return
+        }
+
+        let speedScale: CGFloat = 100.0
+        coin.speed = PointTools.scale(point: launchDirection, by: speedScale)
         isReadyToLaunch = false
+        
     }
     
 // MARK: Initialization
@@ -77,6 +94,8 @@ class GameScene: GameObject {
                 Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 12)
             ]
         }
+        
+        coin.delegate = self
     }
 }
 
@@ -87,5 +106,15 @@ extension GameScene {
     enum TutorialType {
         case basic
         case lvl1
+    }
+}
+
+extension GameScene: CoinDelegate {
+    func coinDidStopMoving(coin: Coin) {
+        canLaunch = true
+    }
+    
+    func coinDidStartMoving(coin: Coin) {
+        canLaunch = false
     }
 }
