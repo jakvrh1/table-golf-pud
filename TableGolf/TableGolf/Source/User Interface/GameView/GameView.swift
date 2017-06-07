@@ -15,7 +15,7 @@ class GameView: UIView {
     
     private var scenePosition: ScenePosition = ScenePosition(offset: CGPoint.zero, center: CGPoint.zero, scale: 1.0)
     
-// MARK: Drawing scene
+// MARK: Drawing Scene
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -77,7 +77,7 @@ class GameView: UIView {
             
             // Define original image size
             let imageSize: CGSize = CGSize(width: 60.0, height: 20.0)
-            // Original image size
+            // Define arrow image
             let imageFrame: CGRect = CGRect(x: 0, y: -imageSize.height*0.5, width: imageSize.width, height: imageSize.height)
             
             image.draw(in: imageFrame)
@@ -93,7 +93,7 @@ class GameView: UIView {
     
 }
 
-// MARK: - Screen position
+// MARK: - Screen Position
 
 fileprivate extension GameView {
     
@@ -104,8 +104,9 @@ fileprivate extension GameView {
         var scale: CGFloat
         
         func frame(forCircle circle: Circle) -> CGRect {
-            return CGRect(x: offset.x + (circle.center.x - circle.radius - center.x) * scale,
-                          y: offset.y + (circle.center.y - circle.radius - center.y) * scale,
+            let origin = transform(point: PointTools.substract(circle.center, circle.radius))
+            return CGRect(x: origin.x,
+                          y: origin.y,
                           width: 2 * circle.radius * scale,
                           height: 2 * circle.radius * scale)
         }
@@ -122,7 +123,7 @@ fileprivate extension GameView {
     }
 }
 
-// MARK: Camera view
+// MARK: Camera Mode
 
 extension GameView {
     enum CameraMode{

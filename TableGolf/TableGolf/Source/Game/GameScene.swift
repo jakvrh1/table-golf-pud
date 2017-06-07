@@ -17,32 +17,37 @@ class GameScene: GameObject {
     var table: Table = Table(withCenter: CGPoint.zero, andRadius: 10)
     var coin: Coin = Coin(withCenter: CGPoint.zero, andRadius: 1)
     
-    
-    var cancelArrow = true
     var isReadyToLaunch: Bool = false // Set to true when dragging
     /// Will always be normalized
     private(set) var launchDirection: CGPoint = CGPoint(x: 0.0, y: -1.0)
-    private(set) var launchMagnitude: CGFloat = 1.0 // TODO: default to 1
-    
+    private(set) var launchMagnitude: CGFloat = 1.0
+    private(set) var magnitudeThreshold: CGFloat = 0.3
     
     func setLaunchParameters(withStartPoint start: CGPoint, endPoint end: CGPoint) {
-        launchDirection = CGPoint(x: start.x-end.x, y: start.y-end.y) // Use normalized(start-end)
-        launchMagnitude = sqrt(pow((launchDirection.x),2)+pow((launchDirection.y),2)) // Use (start-end).length
+        let direction = PointTools.substract(start, end)
+        let directionLenght = PointTools.length(direction)
         
-        // Delete arrow if dragged back
-        if launchMagnitude > 1.0 {
-            launchMagnitude = 1.0
-        } else if launchMagnitude >= 0.3 {
-            cancelArrow = true
-        }  else if cancelArrow {
-            launchMagnitude = 0.0
-        }
+        launchDirection = PointTools.normalized(direction)
+        
+        launchMagnitude = {
+            if directionLenght < magnitudeThreshold {
+                isReadyToLaunch = false
+                return 0.0
+            } else {
+                isReadyToLaunch = true
+                return max(0, min(directionLenght, 1))
+            }
+        }()
     }
     
 // MARK: Initialization
  
     convenience init(withTutorialType tutorialType: TutorialType) {
         self.init()
+        
+        func cartesian(angle: CGFloat, radius: CGFloat) -> CGPoint {
+            return CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
+        }
         
         switch tutorialType {
         case .basic:
@@ -51,17 +56,27 @@ class GameScene: GameObject {
             table = Table(withCenter: CGPoint.zero, andRadius: 100)
             coin = Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4)
             exits = [Exit(withCenter: CGPoint(x: -90, y: 0), andRadius: 10)]
-
-            
-            func cartesian(angle: CGFloat, radius: CGFloat) -> CGPoint {
-                return CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
-            }
   
             obstacles = [
                 Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
                 Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 12),
                 Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 10),
                 Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 9)
+            ]
+            
+        case .lvl1:
+            // Object positions
+            table = Table(withCenter: CGPoint.zero, andRadius: 100)
+            coin = Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4)
+            //exits = [Exit(withCenter: CGPoint(x: -90, y: 90), andRadius: 10)]
+            
+            exits = [Exit(withCenter: cartesian(angle: CGFloat.pi*2 * 0.6, radius: table.radius*0.9), andRadius: 10)]
+            
+            obstacles = [
+                Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
+                Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 20),
+                Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 2),
+                Obstacle(withCenter: cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 12)
             ]
         }
     }
@@ -73,6 +88,6 @@ extension GameScene {
     
     enum TutorialType {
         case basic
+        case lvl1
     }
 }
-
