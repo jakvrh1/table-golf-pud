@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
     
-// MARK: Game initialization
+    // MARK: Game initialization
     
     private var scene: GameScene? = nil {
         didSet {
@@ -24,13 +24,13 @@ class ViewController: UIViewController {
             gameView?.setNeedsDisplay()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scene = GameScene(withTutorialType: .lvl1)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         gameView?.setNeedsDisplay()
@@ -42,9 +42,9 @@ class ViewController: UIViewController {
         
         scaleFactor = 2.0/min(view.frame.size.width, view.frame.size.height)
     }
-
-// MARK: Game gestures
-    @objc private func onPanGesture(sender: UIGestureRecognizer){
+    
+    // MARK: Game gestures
+    @objc private func onPanGesture(sender: UIGestureRecognizer) {
         switch sender.state {
         case .began:
             arrowStartLocation = sender.location(in: gameView)
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         case .ended, .cancelled:
             arrowCurrentLocation = sender.location(in: gameView)
             applyLaunchParameters()
-            scene?.isReadyToLaunch = false
+            scene?.launch()
         case .failed, .possible:
             break
         }
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     private func applyLaunchParameters() {
         if let begin = arrowStartLocation, let current = arrowCurrentLocation {
-                gameView?.scene?.setLaunchParameters(withStartPoint: PointTools.scale(point: begin, by: scaleFactor), endPoint: PointTools.scale(point: current, by: scaleFactor))
+            gameView?.scene?.setLaunchParameters(withStartPoint: PointTools.scale(point: begin, by: scaleFactor), endPoint: PointTools.scale(point: current, by: scaleFactor))
         }
     }
 }

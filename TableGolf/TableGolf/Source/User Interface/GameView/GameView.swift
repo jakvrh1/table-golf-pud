@@ -69,7 +69,7 @@ class GameView: UIView {
             let center = scenePosition.transform(point: scene.coin.center)
             context.translateBy(x: center.x, y: center.y)
             // Arrow angle
-            let angle: CGFloat = atan2(scene.launchDirection.y, scene.launchDirection.x)
+            let angle: CGFloat = PointTools.angle(scene.launchDirection)
             context.rotate(by: angle)
             context.translateBy(x: scenePosition.transform(radius: scene.coin.radius*1.25), y: 0.0)
             // Arrow scale
