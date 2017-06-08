@@ -11,6 +11,8 @@ import UIKit
 protocol GameSceneDelegate: class {
     func gameSceneDidFinishWithVictory(sender: GameScene)
     func gameSceneDidFinishWithLose(sender: GameScene)
+    func gameSceenNeedsRefresh(sender: GameScene)
+    func gameSceenCoinCollision(sender: GameScene)
 }
 
 // MARK: - GameScene
@@ -18,6 +20,7 @@ protocol GameSceneDelegate: class {
 class GameScene: GameObject {
     weak var delegate: GameSceneDelegate?
 
+    // Game objects
     var obstacles = [Obstacle]()
     var exits = [Exit]()
     var table: Table = Table(withCenter: CGPoint.zero, andRadius: 10)
@@ -27,12 +30,14 @@ class GameScene: GameObject {
         }
     }
     
+    fileprivate var displayLink: CADisplayLink? = nil
+    
     // Coin properties
     fileprivate(set) var canLaunch: Bool = true // Set to true when coin isn't moving
     private(set) var isReadyToLaunch: Bool = false // Set to true when dragging
     private let speedScale: CGFloat = 300.0
     
-    /// Will always be normalized
+    // Will always be normalized
     private(set) var launchDirection: CGPoint = CGPoint(x: 1.0, y: 1.0)
     private(set) var launchMagnitude: CGFloat = 0.0
     private var directionLenght: CGFloat = 0.0
@@ -78,6 +83,7 @@ class GameScene: GameObject {
                     // S = N2 * dot(N2, So)*2 -So
                     coin.speed = PointTools.substract(PointTools.scale(point: normal, by: PointTools.dot(normal, coin.speed)*2.0), coin.speed)
                 }
+                delegate?.gameSceenCoinCollision(sender: self)
             }
         }
     }
@@ -86,10 +92,17 @@ class GameScene: GameObject {
         if !isReadyToLaunch {
             return
         }
-
+        displayLink = CADisplayLink(target: self, selector: #selector(onDisplayLink))
+        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        
         coin.speed = PointTools.scale(point: launchDirection, by: speedScale * launchMagnitude)
         
         isReadyToLaunch = false
+    }
+    
+    @objc func onDisplayLink() {
+        move(dt: 1.0/60.0)
+        delegate?.gameSceenNeedsRefresh(sender: self)
     }
     
 // MARK: Initialization
@@ -114,8 +127,6 @@ class GameScene: GameObject {
             // Object positions
             table = Table(withCenter: CGPoint.zero, andRadius: 100)
             coin = Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4)
-            //exits = [Exit(withCenter: CGPoint(x: -90, y: 90), andRadius: 10)]
-            
             exits = [Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.6, radius: table.radius*0.9), andRadius: 10),
             Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.1, radius: table.radius*0.3), andRadius: 5)]
             
@@ -175,7 +186,9 @@ extension GameScene: CoinDelegate {
         } else if isCoinInFinish() {
             delegate?.gameSceneDidFinishWithVictory(sender: self)
         }
+        
         canLaunch = true
+        displayLink?.invalidate()
     }
     
     func coinDidStartMoving(coin: Coin) {

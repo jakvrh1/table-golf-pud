@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet private weak var gameView: GameView?
+    @IBOutlet fileprivate weak var gameView: GameView?
     
     private var arrowStartLocation: CGPoint? = nil
     private var arrowCurrentLocation: CGPoint? = nil
@@ -29,14 +29,6 @@ class ViewController: UIViewController {
         scene = GameScene(withTutorialType: .basic)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         gameView?.cameraMode = .fullScene
-        
-        let displayLink = CADisplayLink(target: self, selector: #selector(onDisplayLink))
-        displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
-    }
-    
-    @objc func onDisplayLink() {
-        scene?.move(dt: 1.0/60.0)
-        gameView?.setNeedsDisplay()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,7 +76,7 @@ class ViewController: UIViewController {
 
 extension ViewController: GameSceneDelegate {
     func gameSceneDidFinishWithVictory(sender: GameScene) {
-        let controller: UIAlertController = UIAlertController(title: "You win!", message: "", preferredStyle: .alert)
+        let controller: UIAlertController = UIAlertController(title: "You win!", message: "You advance to next lvl", preferredStyle: .alert)
         
         controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
             self.scene = GameScene(withTutorialType: .lvl1)
@@ -102,6 +94,14 @@ extension ViewController: GameSceneDelegate {
         }))
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    func gameSceenNeedsRefresh(sender: GameScene) {
+        gameView?.setNeedsDisplay()
+    }
+    
+    func gameSceenCoinCollision(sender: GameScene) {
+        
     }
 }
 
