@@ -45,10 +45,6 @@ class ViewController: UIViewController {
     
     // MARK: Game gestures
     @objc private func onPanGesture(sender: UIGestureRecognizer) {
-        guard scene?.canLaunch == true else {
-            return
-        }
-        
         switch sender.state {
         case .began:
             arrowStartLocation = sender.location(in: gameView)
@@ -96,12 +92,11 @@ extension ViewController: GameSceneDelegate {
         present(controller, animated: true, completion: nil)
     }
     
-    func gameSceenNeedsRefresh(sender: GameScene) {
+    func gameSceneNeedsRefresh(sender: GameScene) {
         gameView?.setNeedsDisplay()
     }
     
-    func gameSceenCoinCollision(sender: GameScene) {
-        
+    func gameSceneDidCollide(sender: GameScene) {
     }
 }
 

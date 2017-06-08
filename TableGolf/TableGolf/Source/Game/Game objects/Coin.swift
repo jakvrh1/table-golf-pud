@@ -16,14 +16,18 @@ protocol CoinDelegate: class {
 class Coin: Circle {
     weak var delegate: CoinDelegate?
     
+    // Friction properties to slowdown coin speed
     private let fixedFriction: CGFloat = 75
     private let linearSpeedFriction: CGFloat = 1
     
     var speed: CGPoint = CGPoint.zero {
         didSet {
+            // If oldValue equals zero and speed not equals zero means coin is moving
             if oldValue == CGPoint.zero && speed != CGPoint.zero {
                 delegate?.coinDidStartMoving(coin: self)
-            } else if oldValue != CGPoint.zero && speed == CGPoint.zero {
+            }
+            //If oldValue not equals zero and speed equals zero means coin is not moving
+            else if oldValue != CGPoint.zero && speed == CGPoint.zero {
                 delegate?.coinDidStopMoving(coin: self)
             }
         }
@@ -34,7 +38,8 @@ class Coin: Circle {
         
         let speedLength = PointTools.length(speed)
         let friction = (fixedFriction + speedLength*linearSpeedFriction)*CGFloat(dt)
-        
+
+        // Slowdown coin by friction every frame until friction becomes bigger than actual speedLength
         if friction < speedLength {
             speed = PointTools.sum(speed, PointTools.scale(point: speed, by: -friction/speedLength))
         } else {
