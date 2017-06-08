@@ -111,5 +111,15 @@ class PointTools {
         return atan2(a.y, a.x)
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - a: <#a description#>
+    ///   - b: <#b description#>
+    /// - Returns: <#return value description#>
+    static func dot(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
+        return a.x*b.x + a.y*b.y
+    }
+    
 }
 

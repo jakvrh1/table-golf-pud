@@ -30,19 +30,19 @@ class Coin: Circle {
     func move(dt: TimeInterval) {
         center = PointTools.sum(center, PointTools.scale(point: speed, by: CGFloat(dt)))
         
-        let fixedFriction: CGFloat = 2
-        let linearSpeedFriction: CGFloat = 0.001
+        let fixedFriction: CGFloat = 75
+        let linearSpeedFriction: CGFloat = 1
         
-        let friction = (fixedFriction + PointTools.length(speed)*linearSpeedFriction)*CGFloat(dt)
+        let speedLength = PointTools.length(speed)
+        let friction = (fixedFriction + speedLength*linearSpeedFriction)*CGFloat(dt)
         
         
-        if friction < PointTools.length(speed) {
-            speed = PointTools.sum(speed, PointTools.scale(point: speed, by: -friction))
+        if friction < speedLength {
+            speed = PointTools.sum(speed, PointTools.scale(point: speed, by: -friction/speedLength))
         } else {
             speed = CGPoint.zero
         }
     }
-    
     
 }
 

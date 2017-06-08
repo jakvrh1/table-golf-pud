@@ -18,18 +18,19 @@ class ViewController: UIViewController {
     
     // MARK: Game initialization
     
-    private var scene: GameScene? = nil {
+    fileprivate var scene: GameScene? = nil {
         didSet {
             gameView?.scene = scene
             gameView?.setNeedsDisplay()
+            scene?.delegate = self
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scene = GameScene(withTutorialType: .lvl1)
+        scene = GameScene(withTutorialType: .basic)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
-        gameView?.cameraMode = .fullScene
+        gameView?.cameraMode = .followCoin(scale: 20.0)
         
         let displayLink = CADisplayLink(target: self, selector: #selector(onDisplayLink))
         displayLink.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
     @objc func onDisplayLink() {
         scene?.move(dt: 1.0/60.0)
         gameView?.setNeedsDisplay()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,6 +80,25 @@ class ViewController: UIViewController {
         if let begin = arrowStartLocation, let current = arrowCurrentLocation {
             gameView?.scene?.setLaunchParameters(withStartPoint: PointTools.scale(point: begin, by: scaleFactor), endPoint: PointTools.scale(point: current, by: scaleFactor))
         }
+    }
+}
+
+extension ViewController: GameSceneDelegate {
+    func gameSceneDidFinishWithVictory(sender: GameScene) {
+        let controller: UIAlertController = UIAlertController(title: "You win!", message: "", preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
+            self.scene = GameScene(withTutorialType: .lvl1)
+        }))
+        present(controller, animated: true, completion: nil)
+        
+    }
+    func gameSceneDidFinishWithLose(sender: GameScene) {
+        let controller: UIAlertController = UIAlertController(title: "You lost!", message: "Try again", preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "Restart", style: .default, handler: { (action) in
+            self.scene = GameScene(withTutorialType: .basic)
+            
+        }))
+        present(controller, animated: true, completion: nil)
     }
 }
 

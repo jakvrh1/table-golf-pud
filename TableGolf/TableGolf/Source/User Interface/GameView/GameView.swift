@@ -55,6 +55,7 @@ class GameView: UIView {
         fillCircle(circle: scene.coin)
         
         
+        
         // Draw obstacles
         UIColor.blue.setFill()
         scene.obstacles.forEach({ obstacle in
