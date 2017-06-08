@@ -16,11 +16,8 @@ protocol GameSceneDelegate: class {
 // MARK: - GameScene
 
 class GameScene: GameObject {
-    
     weak var delegate: GameSceneDelegate?
-    
-    
-    
+
     var obstacles = [Obstacle]()
     var exits = [Exit]()
     var table: Table = Table(withCenter: CGPoint.zero, andRadius: 10)
@@ -30,8 +27,11 @@ class GameScene: GameObject {
         }
     }
     
-    fileprivate(set) var canLaunch: Bool = true
+    // Coin properties
+    fileprivate(set) var canLaunch: Bool = true // Set to true when coin isn't moving
     private(set) var isReadyToLaunch: Bool = false // Set to true when dragging
+    private let speedScale: CGFloat = 300.0
+    
     /// Will always be normalized
     private(set) var launchDirection: CGPoint = CGPoint(x: 1.0, y: 1.0)
     private(set) var launchMagnitude: CGFloat = 0.0
@@ -40,8 +40,8 @@ class GameScene: GameObject {
     
     func setLaunchParameters(withStartPoint start: CGPoint, endPoint end: CGPoint) {
         let direction = PointTools.substract(start, end)
-        directionLenght = PointTools.length(direction)
         
+        directionLenght = PointTools.length(direction)
         launchDirection = PointTools.normalized(direction)
         
         launchMagnitude = {
@@ -57,46 +57,39 @@ class GameScene: GameObject {
     
     func move(dt: TimeInterval) {
         coin.move(dt: dt)
-        
+        coinPathCollision()
+    }
+    
+    func coinPathCollision() {
+        // Checks if obstacle is in the way of coin end location
         for obstacle in obstacles {
-            
-            //CGPoint(x: coin.center.x - obstacle.center.x, y: coin.center.y - obstacle.center.y)
             let length = PointTools.length(CGPoint(x: coin.center.x - obstacle.center.x, y: coin.center.y - obstacle.center.y))
             
             let radiusLength = coin.radius + obstacle.radius
             
+            // if sqrt((obstacle.x-coin.x)^2+(obstacle.y-ccoin.y)^2) < o.radius+c.radius
             if length < radiusLength {
-                
+                // if dot(object.center - coin.center, coin.speed) > 0
                 if PointTools.dot(PointTools.substract(obstacle.center, coin.center), coin.speed) > 0 {
-                   // let normal = PointTools.normalized(obstacle.center - obstacle.center)
-                    
+                    // N1 = (obstacle.center - coin.center).normalized
                     let normal1 = PointTools.normalized(PointTools.substract(obstacle.center, coin.center))
+                    // N2 = (N1y, -N1x)
                     let normal = CGPoint(x: normal1.y, y: -normal1.x)
-                    
-                    
+                    // S = N2 * dot(N2, So)*2 -So
                     coin.speed = PointTools.substract(PointTools.scale(point: normal, by: PointTools.dot(normal, coin.speed)*2.0), coin.speed)
                 }
             }
         }
     }
     
-//    func collision() -> Bool {
-//        
-//    }
-    
     func launch() {
         if !isReadyToLaunch {
             return
         }
 
-        let speedScale: CGFloat = 300.0
         coin.speed = PointTools.scale(point: launchDirection, by: speedScale * launchMagnitude)
         
-        
         isReadyToLaunch = false
-        
-        
-        
     }
     
 // MARK: Initialization
@@ -141,7 +134,6 @@ class GameScene: GameObject {
 // MARK: - TutorialType
 
 extension GameScene {
-    
     enum TutorialType {
         case basic
         case lvl1
@@ -151,26 +143,19 @@ extension GameScene {
 extension GameScene {
     func isCoinOnTable() -> Bool {
         let length = PointTools.length(CGPoint(x: table.center.x - coin.center.x, y: table.center.y - coin.center.y))
-        
         let maxLength = table.radius
-        
-        
-        //print("length: \(length) maxLength: \(maxLength)")
             
         if length > maxLength {
             return false
         }
+        
         return true
     }
     
     func isCoinInFinish() -> Bool {
-        
         for exit in exits {
-            
             let length = PointTools.length(CGPoint(x: exit.center.x - coin.center.x, y: exit.center.y - coin.center.y))
             let maxLength = exit.radius
-            
-            //print("length: \(length) maxLength: \(maxLength)")
             
             if !(length > maxLength) {
                 return true
@@ -181,20 +166,19 @@ extension GameScene {
     }
 }
 
+// MARK: Coin delegate
+
 extension GameScene: CoinDelegate {
     func coinDidStopMoving(coin: Coin) {
-        
         if !isCoinOnTable() {
             delegate?.gameSceneDidFinishWithLose(sender: self)
         } else if isCoinInFinish() {
             delegate?.gameSceneDidFinishWithVictory(sender: self)
         }
         canLaunch = true
-
     }
     
     func coinDidStartMoving(coin: Coin) {
         canLaunch = false
     }
-    
 }

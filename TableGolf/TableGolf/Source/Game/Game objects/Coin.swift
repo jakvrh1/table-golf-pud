@@ -14,8 +14,10 @@ protocol CoinDelegate: class {
 }
 
 class Coin: Circle {
-    
     weak var delegate: CoinDelegate?
+    
+    private let fixedFriction: CGFloat = 75
+    private let linearSpeedFriction: CGFloat = 1
     
     var speed: CGPoint = CGPoint.zero {
         didSet {
@@ -30,12 +32,8 @@ class Coin: Circle {
     func move(dt: TimeInterval) {
         center = PointTools.sum(center, PointTools.scale(point: speed, by: CGFloat(dt)))
         
-        let fixedFriction: CGFloat = 75
-        let linearSpeedFriction: CGFloat = 1
-        
         let speedLength = PointTools.length(speed)
         let friction = (fixedFriction + speedLength*linearSpeedFriction)*CGFloat(dt)
-        
         
         if friction < speedLength {
             speed = PointTools.sum(speed, PointTools.scale(point: speed, by: -friction/speedLength))

@@ -101,8 +101,6 @@ class PointTools {
         return CGPoint(x: cos(angle) * radius, y: sin(angle) * radius)
     }
     
-    // Angle
-    
     /// Location angle
     ///
     /// - Parameter a: location
@@ -111,12 +109,12 @@ class PointTools {
         return atan2(a.y, a.x)
     }
     
-    /// <#Description#>
+    /// Dot product
     ///
     /// - Parameters:
-    ///   - a: <#a description#>
-    ///   - b: <#b description#>
-    /// - Returns: <#return value description#>
+    ///   - a: first location
+    ///   - b: second location
+    /// - Returns: sum of both location axis being multiplied by each other(x1*x2 + y1*y2)
     static func dot(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         return a.x*b.x + a.y*b.y
     }
