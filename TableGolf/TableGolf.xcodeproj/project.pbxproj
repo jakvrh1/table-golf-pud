@@ -10,8 +10,8 @@
 		214EF57A1EEA8C99007A4E45 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5751EEA8C99007A4E45 /* GameView.swift */; };
 		214EF5931EEA9C6F007A4E45 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214EF5921EEA9C6F007A4E45 /* Menu.storyboard */; };
 		214EF5951EEA9C7E007A4E45 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5941EEA9C7E007A4E45 /* MenuViewController.swift */; };
-		214EF5981EEAA4DD007A4E45 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214EF5971EEAA4DD007A4E45 /* Game.storyboard */; };
 		214EF59A1EEAA4E5007A4E45 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5991EEAA4E5007A4E45 /* GameViewController.swift */; };
+		214EF59C1EEAB768007A4E45 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214EF59B1EEAB768007A4E45 /* Game.storyboard */; };
 		21706BC01EE5545E00408CC0 /* TableGolfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BBF1EE5545E00408CC0 /* TableGolfTests.swift */; };
 		21706BCB1EE5545E00408CC0 /* TableGolfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BCA1EE5545E00408CC0 /* TableGolfUITests.swift */; };
 		21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21706BD91EE555C900408CC0 /* Assets.xcassets */; };
@@ -47,8 +47,8 @@
 		214EF5751EEA8C99007A4E45 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		214EF5921EEA9C6F007A4E45 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		214EF5941EEA9C7E007A4E45 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		214EF5971EEAA4DD007A4E45 /* Game.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		214EF5991EEAA4E5007A4E45 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		214EF59B1EEAB768007A4E45 /* Game.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		21706BA71EE5545E00408CC0 /* TableGolf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableGolf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21706BB61EE5545E00408CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21706BBB1EE5545E00408CC0 /* TableGolfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableGolfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,8 +114,8 @@
 		214EF5961EEAA4D5007A4E45 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				214EF5971EEAA4DD007A4E45 /* Game.storyboard */,
 				214EF5991EEAA4E5007A4E45 /* GameViewController.swift */,
+				214EF59B1EEAB768007A4E45 /* Game.storyboard */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -345,8 +345,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				214EF59C1EEAB768007A4E45 /* Game.storyboard in Resources */,
 				21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */,
-				214EF5981EEAA4DD007A4E45 /* Game.storyboard in Resources */,
 				214EF5931EEA9C6F007A4E45 /* Menu.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

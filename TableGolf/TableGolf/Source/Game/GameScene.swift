@@ -13,6 +13,7 @@ protocol GameSceneDelegate: class {
     func gameSceneDidFinishWithLose(sender: GameScene)
     func gameSceneNeedsRefresh(sender: GameScene)
     func gameSceneDidCollide(sender: GameScene)
+    func gameSceneDidChangeNumberOfMoves(sender: GameScene, to numberOfMoves: Int)
 }
 
 // MARK: - GameScene
@@ -40,6 +41,7 @@ class GameScene: GameObject {
     private(set) var isReadyToLaunch: Bool = false // Set to true when dragging
     // Used to scale launchMagnitude (to give coin more appropriate speed)
     private let speedScale: CGFloat = 300.0
+    fileprivate var numberOfMoves: Int = 0
     
     // Will always be normalized
     // Direction in which coin is moving
@@ -210,5 +212,7 @@ extension GameScene: CoinDelegate {
         }
         
         canLaunch = false
+        numberOfMoves += 1
+        delegate?.gameSceneDidChangeNumberOfMoves(sender: self, to: numberOfMoves)
     }
 }
