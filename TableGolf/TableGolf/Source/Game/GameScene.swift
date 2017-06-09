@@ -32,6 +32,9 @@ class GameScene: GameObject {
     
     fileprivate var displayLink: CADisplayLink? = nil
     
+    // Game status
+    var levelName: String = "basic"
+    
     // Coin properties
     fileprivate(set) var canLaunch: Bool = true // Set to true when coin isn't moving
     private(set) var isReadyToLaunch: Bool = false // Set to true when dragging
@@ -119,6 +122,7 @@ class GameScene: GameObject {
         
         switch tutorialType {
         case .basic:
+            levelName = "basic"
             // Object positions
             table = Table(withCenter: CGPoint.zero, andRadius: 100)
             coin = Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4)
@@ -131,6 +135,7 @@ class GameScene: GameObject {
                 Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 9)
             ]
         case .lvl1:
+            levelName = "lvl1"
             // Object positions
             table = Table(withCenter: CGPoint.zero, andRadius: 100)
             coin = Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4)

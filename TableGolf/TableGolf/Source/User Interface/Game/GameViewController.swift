@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  GameViewController.swift
 //  TableGolf
 //
-//  Created by Jaka on 6/5/17.
+//  Created by Jaka on 6/9/17.
 //  Copyright © 2017 Jaka. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class GameViewController: UIViewController {
     @IBOutlet fileprivate weak var gameView: GameView?
     
     private var arrowStartLocation: CGPoint? = nil
@@ -29,6 +29,18 @@ class ViewController: UIViewController {
         scene = GameScene(withTutorialType: .basic)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         gameView?.cameraMode = .fullScene
+        
+        
+        
+        let controller: UIAlertController = UIAlertController(title: scene?.levelName, message: "", preferredStyle: .alert)
+        
+        controller.addAction(UIAlertAction(title: "Start", style: .default, handler: { (action) in
+         
+        }))
+        
+        present(controller, animated: true, completion: nil)
+
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,7 +82,13 @@ class ViewController: UIViewController {
 
 // MARK: GameScene delegate
 
-extension ViewController: GameSceneDelegate {
+extension GameViewController: GameSceneDelegate {
+    
+    func closeCurrentViewController() {
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
     func gameSceneDidFinishWithVictory(sender: GameScene) {
         let controller: UIAlertController = UIAlertController(title: "You win!", message: "You advance to next lvl", preferredStyle: .alert)
         
@@ -84,9 +102,8 @@ extension ViewController: GameSceneDelegate {
     func gameSceneDidFinishWithLose(sender: GameScene) {
         let controller: UIAlertController = UIAlertController(title: "You lost!", message: "Try again", preferredStyle: .alert)
         
-        controller.addAction(UIAlertAction(title: "Restart", style: .default, handler: { (action) in
-            self.scene = GameScene(withTutorialType: .basic)
-            
+        controller.addAction(UIAlertAction(title: "Return to menu", style: .default, handler: { (action) in
+            self.closeCurrentViewController()
         }))
         
         present(controller, animated: true, completion: nil)
