@@ -35,6 +35,7 @@ class GameScene: GameObject {
     
     // Game status
     var levelName: String = "basic"
+    var currentLevel: Int = 0
     
     // Coin properties
     fileprivate(set) var canLaunch: Bool = true // Set to true when coin isn't moving
@@ -119,49 +120,27 @@ class GameScene: GameObject {
     
 // MARK: Initialization
  
-    convenience init(withTutorialType tutorialType: TutorialType) {
+    convenience init(levelNumber: Int) {
         self.init()
         
-        switch tutorialType {
-        case .basic:
-            levelName = "basic"
-            // Object positions
-            table = Table(withCenter: CGPoint.zero, andRadius: 100)
-            coin = Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4)
-            exits = [Exit(withCenter: CGPoint(x: -90, y: 0), andRadius: 10)]
-            
-            obstacles = [
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 12),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 10),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 9)
-            ]
-        case .lvl1:
-            levelName = "lvl1"
-            // Object positions
-            table = Table(withCenter: CGPoint.zero, andRadius: 100)
-            coin = Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4)
-            exits = [Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.6, radius: table.radius*0.9), andRadius: 10),
-            Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.1, radius: table.radius*0.3), andRadius: 5)]
-            
-            obstacles = [
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 20),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 2),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 12)
-            ]
-        }
+        Level.initializeLevels()
+
+        currentLevel = levelNumber
+        loadNewLevel()
         
         coin.delegate = self
     }
-}
-
-// MARK: - TutorialType
-
-extension GameScene {
-    enum TutorialType {
-        case basic
-        case lvl1
+    
+    func loadNewLevel() {
+        if currentLevel < Level.getAllLevels().count {
+            levelName = Level.getAllLevels()[currentLevel].levelName
+            coin = Level.getAllLevels()[currentLevel].coin
+            table = Level.getAllLevels()[currentLevel].table
+            obstacles = Level.getAllLevels()[currentLevel].obstacles
+            exits = Level.getAllLevels()[currentLevel].exits
+            currentLevel += 1
+            numberOfMoves = 0
+        }
     }
 }
 

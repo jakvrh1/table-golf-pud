@@ -27,8 +27,4 @@ class MenuViewController: UIViewController {
         
         navigationController?.pushViewController(controller, animated: true)
     }
-    
-    
-
-
 }

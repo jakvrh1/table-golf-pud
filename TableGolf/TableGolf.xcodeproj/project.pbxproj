@@ -12,6 +12,7 @@
 		214EF5951EEA9C7E007A4E45 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5941EEA9C7E007A4E45 /* MenuViewController.swift */; };
 		214EF59A1EEAA4E5007A4E45 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5991EEAA4E5007A4E45 /* GameViewController.swift */; };
 		214EF59C1EEAB768007A4E45 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214EF59B1EEAB768007A4E45 /* Game.storyboard */; };
+		214EF5A21EEAC625007A4E45 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EF5A11EEAC625007A4E45 /* Level.swift */; };
 		21706BC01EE5545E00408CC0 /* TableGolfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BBF1EE5545E00408CC0 /* TableGolfTests.swift */; };
 		21706BCB1EE5545E00408CC0 /* TableGolfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706BCA1EE5545E00408CC0 /* TableGolfUITests.swift */; };
 		21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21706BD91EE555C900408CC0 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		214EF5941EEA9C7E007A4E45 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		214EF5991EEAA4E5007A4E45 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		214EF59B1EEAB768007A4E45 /* Game.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
+		214EF5A11EEAC625007A4E45 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		21706BA71EE5545E00408CC0 /* TableGolf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableGolf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21706BB61EE5545E00408CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21706BBB1EE5545E00408CC0 /* TableGolfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableGolfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +212,7 @@
 			children = (
 				21706BF61EE559A200408CC0 /* Game objects */,
 				21706BF01EE5591B00408CC0 /* GameScene.swift */,
+				214EF5A11EEAC625007A4E45 /* Level.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				214EF59A1EEAA4E5007A4E45 /* GameViewController.swift in Sources */,
 				214EF57A1EEA8C99007A4E45 /* GameView.swift in Sources */,
 				21706BFA1EE559A200408CC0 /* GameObject.swift in Sources */,
+				214EF5A21EEAC625007A4E45 /* Level.swift in Sources */,
 				214EF5951EEA9C7E007A4E45 /* MenuViewController.swift in Sources */,
 				21B28BDA1EE7D8E000BE4E88 /* PointTools.swift in Sources */,
 				21706BE31EE555C900408CC0 /* AppDelegate.swift in Sources */,

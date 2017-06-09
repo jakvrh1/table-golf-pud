@@ -28,21 +28,20 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scene = GameScene(withTutorialType: .basic)
+        scene = GameScene(levelNumber: 0)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         gameView?.cameraMode = .fullScene
-        
-        
-        
-        let controller: UIAlertController = UIAlertController(title: scene?.levelName, message: "", preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: "Start", style: .default, handler: { (action) in
-         
-        }))
-        
-        present(controller, animated: true, completion: nil)
 
-
+        popupLevelName()
+    }
+    
+    func popupLevelName() {
+        let alert = UIAlertController(title: "", message: scene?.levelName, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when){
+            alert.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,7 +94,12 @@ extension GameViewController: GameSceneDelegate {
         let controller: UIAlertController = UIAlertController(title: "You win!", message: "You advance to next lvl", preferredStyle: .alert)
         
         controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
-            self.scene = GameScene(withTutorialType: .lvl1)
+            
+            if let crLvl = self.scene?.currentLevel {
+                self.scene = GameScene(levelNumber: crLvl)
+                self.popupLevelName()
+            }
+            
         }))
         
         present(controller, animated: true, completion: nil)
