@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet fileprivate weak var gameView: GameView?
     
+    @IBOutlet weak var numberOfMovesLabel: UILabel!
+    
     private var arrowStartLocation: CGPoint? = nil
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
@@ -98,5 +100,10 @@ extension ViewController: GameSceneDelegate {
     
     func gameSceneDidCollide(sender: GameScene) {
     }
+    
+    func gameSceneDidChangeNumberOfMoves(sender: GameScene, to numberOfMoves: Int) {
+        numberOfMovesLabel.text = "Moves: \(numberOfMoves)"
+    }
+
 }
 
