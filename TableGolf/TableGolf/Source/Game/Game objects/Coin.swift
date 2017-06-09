@@ -22,11 +22,11 @@ class Coin: Circle {
     
     var speed: CGPoint = CGPoint.zero {
         didSet {
-            // If oldValue equals zero and speed not equals zero means coin is moving
+            // Checks if coin started moving
             if oldValue == CGPoint.zero && speed != CGPoint.zero {
                 delegate?.coinDidStartMoving(coin: self)
             }
-            //If oldValue not equals zero and speed equals zero means coin is not moving
+            // Checks if coin stoped moving
             else if oldValue != CGPoint.zero && speed == CGPoint.zero {
                 delegate?.coinDidStopMoving(coin: self)
             }
