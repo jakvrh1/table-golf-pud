@@ -40,9 +40,12 @@
                                 <state key="normal" title="New level"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJi-hn-zQV">
-                                <rect key="frame" x="164" y="351" width="77" height="30"/>
+                                <rect key="frame" x="164" y="351" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Select level"/>
+                                <connections>
+                                    <action selector="selectLevel:" destination="lCO-mg-DDm" eventType="touchUpInside" id="hSI-Rg-kqM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-0W-0ym">
                                 <rect key="frame" x="166" y="140" width="42" height="21"/>
@@ -65,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0t-ak-5n4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="-230"/>
+            <point key="canvasLocation" x="684" y="-230"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t8C-ha-OIc">

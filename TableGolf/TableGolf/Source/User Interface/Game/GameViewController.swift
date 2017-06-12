@@ -11,11 +11,13 @@ import UIKit
 class GameViewController: UIViewController {
     @IBOutlet fileprivate weak var gameView: GameView?
     
-    @IBOutlet weak var numberOfMovesLabel: UILabel!
+    @IBOutlet weak private(set) var numberOfMovesLabel: UILabel!
  
     private var arrowStartLocation: CGPoint? = nil
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
+    
+    public var selectedLevel: Int = 0
     
     // MARK: Game initialization
     fileprivate var scene: GameScene? = nil {
@@ -25,10 +27,15 @@ class GameViewController: UIViewController {
             scene?.delegate = self
         }
     }
+//    
+//    convenience init(levelIndex index: Int) {
+//        self.init()
+//        self.selectedLevel = index
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scene = GameScene(levelNumber: 0)
+        scene = GameScene(levelNumber: selectedLevel)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         gameView?.cameraMode = .fullScene
 
