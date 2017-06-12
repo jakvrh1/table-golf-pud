@@ -21,41 +21,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPm-Sx-lkW">
-                                <rect key="frame" x="164" y="195" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-0W-0ym">
+                                <rect key="frame" x="12" y="114" width="351" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPm-Sx-lkW">
+                                <rect key="frame" x="20" y="184" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2xP-OP-KZu"/>
+                                </constraints>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="playGameScene:" destination="lCO-mg-DDm" eventType="touchUpInside" id="zuC-UG-XCd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPh-mt-JhM">
-                                <rect key="frame" x="164" y="243" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit level"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPh-mt-JhM">
+                                <rect key="frame" x="20" y="246" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Edit level">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0v-Kt-N0w">
-                                <rect key="frame" x="164" y="299" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New level"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0v-Kt-N0w">
+                                <rect key="frame" x="20" y="316" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="New level">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJi-hn-zQV">
-                                <rect key="frame" x="164" y="351" width="102" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJi-hn-zQV">
+                                <rect key="frame" x="20" y="387" width="335" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Select level"/>
                                 <connections>
                                     <action selector="selectLevel:" destination="lCO-mg-DDm" eventType="touchUpInside" id="hSI-Rg-kqM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-0W-0ym">
-                                <rect key="frame" x="166" y="140" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="B0v-Kt-N0w" firstAttribute="leading" secondItem="VPh-mt-JhM" secondAttribute="leading" id="2Ab-Cw-dbE"/>
+                            <constraint firstItem="B0v-Kt-N0w" firstAttribute="top" secondItem="VPh-mt-JhM" secondAttribute="bottom" constant="20" id="5Ei-V7-Xfr"/>
+                            <constraint firstItem="tJi-hn-zQV" firstAttribute="height" secondItem="B0v-Kt-N0w" secondAttribute="height" id="FAI-oY-4Pv"/>
+                            <constraint firstItem="VPh-mt-JhM" firstAttribute="leading" secondItem="aPm-Sx-lkW" secondAttribute="leading" id="LH6-qJ-oN5"/>
+                            <constraint firstItem="oRn-0W-0ym" firstAttribute="top" secondItem="rDh-Vh-MAV" secondAttribute="bottom" constant="50" id="Lc3-92-VJQ"/>
+                            <constraint firstItem="aPm-Sx-lkW" firstAttribute="top" secondItem="rDh-Vh-MAV" secondAttribute="bottom" constant="120" id="OVE-Vw-Wit"/>
+                            <constraint firstItem="tJi-hn-zQV" firstAttribute="top" secondItem="B0v-Kt-N0w" secondAttribute="bottom" constant="21" id="QLV-kl-8eL"/>
+                            <constraint firstItem="tJi-hn-zQV" firstAttribute="leading" secondItem="B0v-Kt-N0w" secondAttribute="leading" id="S1Z-id-kzz"/>
+                            <constraint firstItem="tJi-hn-zQV" firstAttribute="trailing" secondItem="B0v-Kt-N0w" secondAttribute="trailing" id="biF-qx-xUH"/>
+                            <constraint firstItem="oRn-0W-0ym" firstAttribute="leading" secondItem="jEU-rZ-1eo" secondAttribute="leading" constant="12" id="dTT-UD-okz"/>
+                            <constraint firstItem="B0v-Kt-N0w" firstAttribute="trailing" secondItem="VPh-mt-JhM" secondAttribute="trailing" id="fKj-nB-1Z1"/>
+                            <constraint firstItem="VPh-mt-JhM" firstAttribute="trailing" secondItem="aPm-Sx-lkW" secondAttribute="trailing" id="g65-6C-Om5"/>
+                            <constraint firstItem="VPh-mt-JhM" firstAttribute="height" secondItem="aPm-Sx-lkW" secondAttribute="height" id="jEM-hB-bqK"/>
+                            <constraint firstItem="B0v-Kt-N0w" firstAttribute="height" secondItem="VPh-mt-JhM" secondAttribute="height" id="k0v-46-pNV"/>
+                            <constraint firstAttribute="trailing" secondItem="oRn-0W-0ym" secondAttribute="trailing" constant="12" id="kT2-eC-M0G"/>
+                            <constraint firstItem="VPh-mt-JhM" firstAttribute="top" secondItem="aPm-Sx-lkW" secondAttribute="bottom" constant="12" id="kTg-zM-Snk"/>
+                            <constraint firstItem="B0v-Kt-N0w" firstAttribute="height" secondItem="VPh-mt-JhM" secondAttribute="height" id="qA2-GV-CUE"/>
+                            <constraint firstAttribute="trailing" secondItem="aPm-Sx-lkW" secondAttribute="trailing" constant="20" id="t6M-bS-w13"/>
+                            <constraint firstItem="aPm-Sx-lkW" firstAttribute="leading" secondItem="jEU-rZ-1eo" secondAttribute="leading" constant="20" id="vGn-Nu-BEW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3lj-9I-3q9"/>
                     <connections>
@@ -68,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0t-ak-5n4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="684" y="-230"/>
+            <point key="canvasLocation" x="684" y="-230.73463268365819"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t8C-ha-OIc">

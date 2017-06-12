@@ -20,20 +20,12 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func playGameScene(_ sender: Any) {
-       /*/ let controller = UIStoryboard(name: "Game", bundle: nil).instantiateViewController(withIdentifier: "GameViewController")*/
-        
         let controller: GameViewController = UIStoryboard(name: "Game", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         
         controller.selectedLevel = selectedLevel
-        
-        
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -41,7 +33,6 @@ class MenuViewController: UIViewController {
         let controller: LevelsViewController = UIStoryboard(name: "Levels", bundle: nil).instantiateViewController(withIdentifier: "LevelsViewController") as!LevelsViewController
         
         controller.delegate = self
-  
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -51,6 +42,5 @@ extension MenuViewController: LevelsDelegate {
     func didSelectLevel(sender: LevelsViewController, levelName: String, levelIndex: Int) {
         label.text = levelName
         selectedLevel = levelIndex
-        
     }
 }

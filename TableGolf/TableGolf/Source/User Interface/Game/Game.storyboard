@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" restorationIdentifier="GameView" translatesAutoresizingMaskIntoConstraints="NO" id="0Yn-gD-ZIt" customClass="GameView" customModule="TableGolf" customModuleProvider="target">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rcf-xK-P63">
                                         <rect key="frame" x="20" y="558" width="110" height="46"/>
@@ -39,9 +38,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kCm-hU-5s4" firstAttribute="top" secondItem="0Yn-gD-ZIt" secondAttribute="bottom" id="3IU-ib-ny3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0Yn-gD-ZIt" secondAttribute="trailing" id="Ksj-sR-fKd"/>
+                            <constraint firstAttribute="trailing" secondItem="0Yn-gD-ZIt" secondAttribute="trailing" id="Ksj-sR-fKd"/>
                             <constraint firstItem="0Yn-gD-ZIt" firstAttribute="top" secondItem="GMZ-z0-TbM" secondAttribute="bottom" id="O5i-uv-iJs"/>
-                            <constraint firstItem="0Yn-gD-ZIt" firstAttribute="leading" secondItem="Pkh-o9-92d" secondAttribute="leadingMargin" id="sgs-ss-YQW"/>
+                            <constraint firstItem="0Yn-gD-ZIt" firstAttribute="leading" secondItem="Pkh-o9-92d" secondAttribute="leading" id="sgs-ss-YQW"/>
                         </constraints>
                     </view>
                     <connections>

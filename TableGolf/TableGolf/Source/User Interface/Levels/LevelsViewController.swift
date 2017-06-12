@@ -45,6 +45,7 @@ class LevelsViewController: UIViewController {
 
 }
 
+
 extension LevelsViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return levels.count
@@ -58,6 +59,7 @@ extension LevelsViewController: UITableViewDataSource {
     }
 }
 
+
 extension LevelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectLevel(sender: self, levelName: levels[indexPath.row].title,levelIndex: indexPath.row)
@@ -65,6 +67,7 @@ extension LevelsViewController: UITableViewDelegate {
     }
 }
 
+//MARK: Cell data
 extension LevelsViewController {
     struct LevelData {
         var title: String

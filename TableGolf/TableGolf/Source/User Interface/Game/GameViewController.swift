@@ -37,6 +37,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         scene = GameScene(levelNumber: selectedLevel)
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
+        //gameView?.cameraMode = .followCoin(scale: 10.0)
         gameView?.cameraMode = .fullScene
 
         popupLevelName()
