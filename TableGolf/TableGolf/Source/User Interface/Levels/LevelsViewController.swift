@@ -9,16 +9,16 @@
 import UIKit
 
 protocol LevelsDelegate: class {
-    func didSelectLevel(sender: LevelsViewController, levelName: String, levelIndex: Int)
+    func didSelectLevel(sender: LevelsViewController, level: Level)
 }
 
-class LevelsViewController: UIViewController {
+class LevelsViewController: BaseViewController {
 
     public weak var delegate: LevelsDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     
-    var levels: [LevelData] = [LevelData]()
+    var levels: [Level] = [Level]()
     
     
     override func viewDidLoad() {
@@ -26,9 +26,8 @@ class LevelsViewController: UIViewController {
         
         Level.initializeLevels()
         
-        for i in Level.getAllLevels() {
-            levels.append(LevelData(title: i.levelName))
-        }
+        levels = Level.getAllLevels()
+        
         
         setUpTableView()
     }
@@ -54,7 +53,7 @@ extension LevelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LevelTableViewCell", for: indexPath) as! LevelTableViewCell
         
-        cell.levelData = levels[indexPath.row]
+        cell.level = levels[indexPath.row]
         return cell
     }
 }
@@ -62,7 +61,7 @@ extension LevelsViewController: UITableViewDataSource {
 
 extension LevelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectLevel(sender: self, levelName: levels[indexPath.row].title,levelIndex: indexPath.row)
+        delegate?.didSelectLevel(sender: self, level: levels[indexPath.row])
         navigationController?.popViewController(animated: true)
     }
 }

@@ -31,11 +31,10 @@ class GameScene: GameObject {
         }
     }
     
-    fileprivate var displayLink: CADisplayLink? = nil
+    // Editor  
     
-    // Game status
-    var levelName: String = "basic"
-    var currentLevel: Int = 0
+    
+    fileprivate var displayLink: CADisplayLink? = nil
     
     // Coin properties
     fileprivate(set) var canLaunch: Bool = true // Set to true when coin isn't moving
@@ -120,28 +119,24 @@ class GameScene: GameObject {
     
 // MARK: Initialization
  
-    convenience init(levelNumber: Int) {
+    convenience init(level: Level) {
         self.init()
         
-        Level.initializeLevels()
-
-        currentLevel = levelNumber
-        loadNewLevel()
+        table = level.table.duplicate()
+        coin = level.coin.duplicate()
+        exits = level.exits.map { $0.duplicate() }
+        obstacles = level.obstacles.map { $0.duplicate() }
         
         coin.delegate = self
     }
     
-    func loadNewLevel() {
-        if currentLevel < Level.getAllLevels().count {
-            levelName = Level.getAllLevels()[currentLevel].levelName
-            coin = Level.getAllLevels()[currentLevel].coin
-            table = Level.getAllLevels()[currentLevel].table
-            obstacles = Level.getAllLevels()[currentLevel].obstacles
-            exits = Level.getAllLevels()[currentLevel].exits
-            currentLevel += 1
-            numberOfMoves = 0
-        }
+    convenience init(newLevel: Bool) {
+        self.init()
+        table = Table(withCenter: CGPoint.zero, andRadius: 100)
+        coin = Coin(withCenter: CGPoint.zero, andRadius: 4)
+        
     }
+    
 }
 
 // MARK: Coin delegate

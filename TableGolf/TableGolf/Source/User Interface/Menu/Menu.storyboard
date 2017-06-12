@@ -46,6 +46,9 @@
                                 <state key="normal" title="Edit level">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="editLevel:" destination="lCO-mg-DDm" eventType="touchUpInside" id="Oa8-Hu-Aq6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0v-Kt-N0w">
                                 <rect key="frame" x="20" y="316" width="335" height="50"/>
@@ -53,6 +56,9 @@
                                 <state key="normal" title="New level">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="newLevel:" destination="lCO-mg-DDm" eventType="touchUpInside" id="VQF-2n-ZNi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJi-hn-zQV">
                                 <rect key="frame" x="20" y="387" width="335" height="50"/>

@@ -27,6 +27,9 @@
 		21726A081EEE638500F2E847 /* Levels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21726A071EEE638500F2E847 /* Levels.storyboard */; };
 		21726A0A1EEE63A100F2E847 /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A091EEE63A100F2E847 /* LevelsViewController.swift */; };
 		21726A0C1EEE64A700F2E847 /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A0B1EEE64A700F2E847 /* LevelTableViewCell.swift */; };
+		21726A121EEEA83600F2E847 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A111EEEA83600F2E847 /* EditorViewController.swift */; };
+		21726A161EEEA91000F2E847 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21726A151EEEA91000F2E847 /* Editor.storyboard */; };
+		21726A191EEEC56700F2E847 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A181EEEC56700F2E847 /* BaseViewController.swift */; };
 		21B28BDA1EE7D8E000BE4E88 /* PointTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B28BD91EE7D8E000BE4E88 /* PointTools.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +77,9 @@
 		21726A071EEE638500F2E847 /* Levels.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Levels.storyboard; sourceTree = "<group>"; };
 		21726A091EEE63A100F2E847 /* LevelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
 		21726A0B1EEE64A700F2E847 /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
+		21726A111EEEA83600F2E847 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditorViewController.swift; path = "TableGolf/Source/User Interface/EditorView/EditorViewController.swift"; sourceTree = SOURCE_ROOT; };
+		21726A151EEEA91000F2E847 /* Editor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Editor.storyboard; path = "TableGolf/Source/User Interface/EditorView/Editor.storyboard"; sourceTree = SOURCE_ROOT; };
+		21726A181EEEC56700F2E847 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		21B28BD91EE7D8E000BE4E88 /* PointTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +212,8 @@
 		21706BDD1EE555C900408CC0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				21726A171EEEC55F00F2E847 /* Main */,
+				21726A0D1EEEA3CF00F2E847 /* Editor */,
 				21726A061EEE636800F2E847 /* Levels */,
 				214EF5961EEAA4D5007A4E45 /* Game */,
 				214EF5851EEA91E0007A4E45 /* Menu */,
@@ -245,6 +253,24 @@
 				21726A0B1EEE64A700F2E847 /* LevelTableViewCell.swift */,
 			);
 			path = Levels;
+			sourceTree = "<group>";
+		};
+		21726A0D1EEEA3CF00F2E847 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				21726A111EEEA83600F2E847 /* EditorViewController.swift */,
+				21726A151EEEA91000F2E847 /* Editor.storyboard */,
+			);
+			name = Editor;
+			path = TableGolf/Source/Editor;
+			sourceTree = SOURCE_ROOT;
+		};
+		21726A171EEEC55F00F2E847 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				21726A181EEEC56700F2E847 /* BaseViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		21B28BD81EE7D8D100BE4E88 /* Tools */ = {
@@ -367,6 +393,7 @@
 			files = (
 				214EF59C1EEAB768007A4E45 /* Game.storyboard in Resources */,
 				21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */,
+				21726A161EEEA91000F2E847 /* Editor.storyboard in Resources */,
 				214EF5931EEA9C6F007A4E45 /* Menu.storyboard in Resources */,
 				21726A081EEE638500F2E847 /* Levels.storyboard in Resources */,
 			);
@@ -400,10 +427,12 @@
 				214EF59A1EEAA4E5007A4E45 /* GameViewController.swift in Sources */,
 				214EF57A1EEA8C99007A4E45 /* GameView.swift in Sources */,
 				21706BFA1EE559A200408CC0 /* GameObject.swift in Sources */,
+				21726A191EEEC56700F2E847 /* BaseViewController.swift in Sources */,
 				214EF5A21EEAC625007A4E45 /* Level.swift in Sources */,
 				214EF5951EEA9C7E007A4E45 /* MenuViewController.swift in Sources */,
 				21B28BDA1EE7D8E000BE4E88 /* PointTools.swift in Sources */,
 				21706BE31EE555C900408CC0 /* AppDelegate.swift in Sources */,
+				21726A121EEEA83600F2E847 /* EditorViewController.swift in Sources */,
 				21726A0A1EEE63A100F2E847 /* LevelsViewController.swift in Sources */,
 				21706BF91EE559A200408CC0 /* Circle.swift in Sources */,
 				21706C001EE559FC00408CC0 /* Exit.swift in Sources */,

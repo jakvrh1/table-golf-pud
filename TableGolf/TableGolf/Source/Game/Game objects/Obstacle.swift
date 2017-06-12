@@ -10,4 +10,8 @@ import UIKit
 
 class Obstacle: Circle {
 
+    func duplicate() -> Obstacle {
+        return Obstacle(withCenter: self.center, andRadius: self.radius)
+    }
+    
 }

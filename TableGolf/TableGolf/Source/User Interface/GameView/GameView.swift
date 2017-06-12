@@ -89,6 +89,10 @@ class GameView: UIView {
         let path = UIBezierPath(ovalIn: scenePosition.frame(forCircle: circle))
         path.fill()
     }
+    
+    func convertViewToSceneCoordinates(location: CGPoint) -> CGPoint {
+        return scenePosition.backwardTransform(point: location)
+    }
 }
 
 // MARK: - Screen Position
@@ -111,6 +115,11 @@ fileprivate extension GameView {
         func transform(point: CGPoint) -> CGPoint {
             return CGPoint(x: offset.x + (point.x-center.x) * scale,
                            y: offset.y + (point.y-center.y) * scale)
+        }
+        
+        func backwardTransform(point: CGPoint) -> CGPoint {
+            return CGPoint(x: (point.x - offset.x)/scale + center.x,
+                           y: (point.y - offset.y)/scale + center.y)
         }
         
         func transform(radius: CGFloat) -> CGFloat {

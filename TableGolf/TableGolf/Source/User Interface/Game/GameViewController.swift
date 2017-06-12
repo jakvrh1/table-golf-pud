@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: BaseViewController {
     @IBOutlet fileprivate weak var gameView: GameView?
     
     @IBOutlet weak private(set) var numberOfMovesLabel: UILabel!
@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
     
-    public var selectedLevel: Int = 0
+    public var selectedLevel: Level?
     
     // MARK: Game initialization
     fileprivate var scene: GameScene? = nil {
@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scene = GameScene(levelNumber: selectedLevel)
+        scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         //gameView?.cameraMode = .followCoin(scale: 10.0)
         gameView?.cameraMode = .fullScene
@@ -44,7 +44,7 @@ class GameViewController: UIViewController {
     }
     
     func popupLevelName() {
-        let alert = UIAlertController(title: "", message: scene?.levelName, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: selectedLevel?.levelName, preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when){
@@ -103,8 +103,8 @@ extension GameViewController: GameSceneDelegate {
         
         controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
             
-            if let crLvl = self.scene?.currentLevel {
-                self.scene = GameScene(levelNumber: crLvl)
+            if let level = self.selectedLevel {
+                self.scene = GameScene(level: level)
                 self.popupLevelName()
             }
             

@@ -11,9 +11,9 @@ import UIKit
 class LevelTableViewCell: UITableViewCell {
     @IBOutlet weak var levelNameLabel: UILabel!
     
-    var levelData: LevelsViewController.LevelData? {
+    var level: Level? {
         didSet {
-            levelNameLabel?.text = levelData?.title
+            levelNameLabel?.text = level?.levelName
         }
     }
     

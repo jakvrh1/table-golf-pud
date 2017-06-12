@@ -47,6 +47,10 @@ class Coin: Circle {
         }
     }
     
+    func duplicate() -> Coin {
+        return Coin(withCenter: self.center, andRadius: self.radius)
+    }
+    
 }
 
 

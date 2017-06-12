@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: BaseViewController {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var playButton: UIButton!
@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var newLevelButton: UIButton!
     @IBOutlet weak var selectLevelButton: UIButton!
     
-    fileprivate var selectedLevel: Int = 0
+    fileprivate var selectedLevel: Level?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,19 @@ class MenuViewController: UIViewController {
         let controller: GameViewController = UIStoryboard(name: "Game", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         
         controller.selectedLevel = selectedLevel
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func editLevel(_ sender: Any) {
+        let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
+        controller.level = selectedLevel
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func newLevel(_ sender: Any) {
+        let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
+        
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -39,8 +52,8 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: LevelsDelegate {
-    func didSelectLevel(sender: LevelsViewController, levelName: String, levelIndex: Int) {
-        label.text = levelName
-        selectedLevel = levelIndex
+    func didSelectLevel(sender: LevelsViewController, level: Level) {
+        label.text = level.levelName
+        selectedLevel = level
     }
 }
