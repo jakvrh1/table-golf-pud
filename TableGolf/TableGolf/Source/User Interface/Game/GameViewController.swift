@@ -35,7 +35,13 @@ class GameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
+        /*scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))*/
+        if let selectedLevel = selectedLevel {
+            scene = GameScene(level: selectedLevel)
+        } else {
+            scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
+        }
+        
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
         //gameView?.cameraMode = .followCoin(scale: 10.0)
         gameView?.cameraMode = .fullScene

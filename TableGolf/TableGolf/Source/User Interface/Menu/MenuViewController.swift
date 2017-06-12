@@ -20,6 +20,9 @@ class MenuViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Level.initializeLevels()
+        selectedLevel = Level.getAllLevels()[0]
+        label.text = Level.getAllLevels()[0].levelName
     }
 
     @IBAction func playGameScene(_ sender: Any) {
