@@ -20,9 +20,8 @@ class MenuViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Level.initializeLevels()
-        selectedLevel = Level.getAllLevels()[0]
-        label.text = Level.getAllLevels()[0].levelName
+        selectedLevel = Level.allLevels.first
+        label.text = Level.allLevels.first?.levelName ?? "No levels"
     }
 
     @IBAction func playGameScene(_ sender: Any) {
@@ -35,12 +34,14 @@ class MenuViewController: BaseViewController {
     @IBAction func editLevel(_ sender: Any) {
         let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
         controller.level = selectedLevel
+        controller.delegate = self
         
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func newLevel(_ sender: Any) {
         let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
+        controller.delegate = self
         
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -58,5 +59,12 @@ extension MenuViewController: LevelsDelegate {
     func didSelectLevel(sender: LevelsViewController, level: Level) {
         label.text = level.levelName
         selectedLevel = level
+    }
+}
+
+extension MenuViewController: EditorDelegate {
+    func didSaveLevel(editor: EditorViewController, level: Level) {
+        self.selectedLevel = level
+        self.label.text = level.levelName
     }
 }

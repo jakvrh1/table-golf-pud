@@ -24,8 +24,7 @@ class LevelsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Level.initializeLevels()
-        levels = Level.getAllLevels()
+        levels = Level.allLevels
         
         setUpTableView()
     }

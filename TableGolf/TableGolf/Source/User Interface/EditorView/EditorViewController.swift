@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditorDelegate: class {
+    func didSaveLevel(editor: EditorViewController, level: Level)
+}
+
 class EditorViewController: BaseViewController {
 
     @IBOutlet fileprivate var gameView: GameView?
@@ -23,6 +27,8 @@ class EditorViewController: BaseViewController {
     @IBOutlet weak var topObjectMenuPanelTopLayoutConstraint: NSLayoutConstraint?
     
     @IBOutlet fileprivate weak var addElementPanelBottomConstraint: NSLayoutConstraint?
+    
+    weak var delegate: EditorDelegate?
     
     private var mode: Mode = .scene
     
@@ -68,9 +74,34 @@ class EditorViewController: BaseViewController {
         
         gameView?.cameraMode = .fullScene
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSave))
+        
     }
     
-    
+    func onSave() {
+        let controller: UIAlertController = UIAlertController(title: "Level name: ", message: "", preferredStyle: .alert)
+        
+        
+        controller.addTextField { (text) in
+            controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                if let level = self.level, let scene = self.scene {
+                    level.levelName = text.text ?? "customLevel"
+                    level.obstacles = scene.obstacles
+                    level.exits = scene.exits
+                    level.coin = scene.coin
+                    level.table = scene.table
+                    Level.saveLevel(level: level)
+                    self.delegate?.didSaveLevel(editor: self, level: level)
+                }
+            }))
+        }
+        
+        controller.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+            
+        }))
+        
+        present(controller, animated: true, completion: nil)
+    }
     
     @objc private func onTap(sender: UIGestureRecognizer) {
         if mode == .scene {

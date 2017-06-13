@@ -10,15 +10,23 @@ import UIKit
 
 class Level {
     
-    static private(set) var allLevels: [Level] = []
+    static private var lodadedLevels: [Level]? = nil
+    static var allLevels: [Level] {
+        if let lodadedLevels = lodadedLevels {
+            return lodadedLevels
+        } else {
+            initializeLevels()
+            return lodadedLevels ?? []
+        }
+    }
     
     // Level objects
-    public var obstacles: [Obstacle]
-    public var exits: [Exit]
-    public var table: Table
-    public var coin: Coin
+    var obstacles: [Obstacle]
+    var exits: [Exit]
+    var table: Table
+    var coin: Coin
     
-    let levelName: String
+    var levelName: String
     
     init(levelName: String, coin: Coin, table: Table, exits: [Exit], obstacles: [Obstacle]) {
         self.coin = coin
@@ -29,11 +37,18 @@ class Level {
         self.levelName = levelName
     }
     
-    static func getAllLevels() -> [Level] {
-        return allLevels
+    static func saveLevel(level: Level) {
+        var newLevels = allLevels
+        newLevels.append(level)
+        lodadedLevels = newLevels
+        print("Obstacles \(level.obstacles.count)")
+        // TODO: save to file
     }
     
-    static func initializeLevels() {
+    private static func initializeLevels() {
+        
+        // TODO: read from file else load demo
+        
         var levels: [Level] = [Level]()
         var table = Table(withCenter: CGPoint.zero, andRadius: 100)
         
@@ -65,6 +80,6 @@ class Level {
                 ])
         )
         
-        allLevels = levels
+        lodadedLevels = levels
     }
 }
