@@ -82,4 +82,36 @@ class Level {
         
         lodadedLevels = levels
     }
+    
+    static func serializeDataIntoJSON() {
+        var levelsDescriptor: [[String: Any]] = self.allLevels.flatMap { level in
+            var descriptor = [String: Any]()
+            
+            descriptor["name"] = level.levelName
+            descriptor["coin"] = level.coin.descriptor
+            
+            let exitsDescriptor: [[String: Any]] = level.exits.flatMap{ exit in
+                return exit.descriptor
+            }
+            descriptor["exits"] = exitsDescriptor
+            
+            let obstaclesDescriptor: [[String: Any]] = level.obstacles.flatMap{ obstacle in
+                return obstacle.descriptor
+            }
+            descriptor["obstacles"] = obstaclesDescriptor
+            
+            descriptor["table"] = level.table.descriptor
+            
+            
+            return descriptor
+        }
+        
+        // use this
+        /*JSONSerialization.data(withJSONObject: levelsDescriptor, options: .prettyPrinted)*/
+        
+    }
+    
+    static func deserializeDataFromJSON() {
+        
+    }
 }

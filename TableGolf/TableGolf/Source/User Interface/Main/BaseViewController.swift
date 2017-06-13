@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Base class to disable interactive pop gesture recognizer
+
 class BaseViewController: UIViewController {
 
     var allowsPopupGesture: Bool {

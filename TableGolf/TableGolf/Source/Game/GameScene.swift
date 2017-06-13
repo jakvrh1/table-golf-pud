@@ -31,9 +31,6 @@ class GameScene: GameObject {
         }
     }
     
-    // Editor  
-    ///
-    
     fileprivate var displayLink: CADisplayLink? = nil
     
     // Coin properties
@@ -117,12 +114,8 @@ class GameScene: GameObject {
         delegate?.gameSceneNeedsRefresh(sender: self)
     }
     
+    // Returns object within the mouse radius
     func firstObject(at location: CGPoint, radius: CGFloat) -> Circle? {
-        
-        /* selectedObject = ((((level.obstacles as [Circle]) + (level.exits as [Circle]) + ([level.coin] as [Circle])).filter { return $0.radius >= PointTools.length(PointTools.substract($0.center, location)) }).sorted { (a, b) -> Bool in
-         return PointTools.length(PointTools.substract(a.center, location)) > PointTools.length(PointTools.substract(b.center, location))
-         }).first*/
-        
         let objects: [Circle] = (obstacles as [Circle]) + (exits as [Circle]) + ([coin] as [Circle])
         
         for object in objects {
