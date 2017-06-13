@@ -28,7 +28,7 @@ class MenuViewController: BaseViewController {
     @IBAction func playGameScene(_ sender: Any) {
         let controller: GameViewController = UIStoryboard(name: "Game", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         
-        controller.selectedLevel = selectedLevel
+        controller.level = selectedLevel
         navigationController?.pushViewController(controller, animated: true)
     }
     

@@ -25,9 +25,7 @@ class LevelsViewController: BaseViewController {
         super.viewDidLoad()
         
         Level.initializeLevels()
-        
         levels = Level.getAllLevels()
-        
         
         setUpTableView()
     }

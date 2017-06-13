@@ -32,7 +32,7 @@ class GameScene: GameObject {
     }
     
     // Editor  
-    
+    ///
     
     fileprivate var displayLink: CADisplayLink? = nil
     
@@ -115,6 +115,43 @@ class GameScene: GameObject {
     @objc func onDisplayLink() {
         move(dt: 1.0/60.0)
         delegate?.gameSceneNeedsRefresh(sender: self)
+    }
+    
+    func firstObject(at location: CGPoint, radius: CGFloat) -> Circle? {
+        
+        /* selectedObject = ((((level.obstacles as [Circle]) + (level.exits as [Circle]) + ([level.coin] as [Circle])).filter { return $0.radius >= PointTools.length(PointTools.substract($0.center, location)) }).sorted { (a, b) -> Bool in
+         return PointTools.length(PointTools.substract(a.center, location)) > PointTools.length(PointTools.substract(b.center, location))
+         }).first*/
+        
+        let objects: [Circle] = (obstacles as [Circle]) + (exits as [Circle]) + ([coin] as [Circle])
+        
+        for object in objects {
+            if object.radius + radius >= PointTools.length(PointTools.substract(object.center, location)) {
+                return object
+            }
+        }
+        return nil
+    }
+    
+    func removeObject(object: Circle) {
+        var index: Int = 0
+        
+        for element in obstacles {
+            if element === object {
+                obstacles.remove(at: index)
+                return
+            }
+            index += 1
+        }
+        
+        index = 0
+        for element in exits {
+            if element === object {
+                exits.remove(at: index)
+                return
+            }
+            index += 1
+        }
     }
     
 // MARK: Initialization

@@ -19,5 +19,4 @@ class Circle: GameObject {
         self.center = center
         self.radius = radius
     }
-
 }

@@ -26,6 +26,61 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwZ-DU-qzb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oof-jE-NGT">
+                                        <rect key="frame" x="0.0" y="-100" width="375" height="100"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFa-X8-J4b">
+                                                <rect key="frame" x="250" y="35" width="63" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Delete"/>
+                                                <connections>
+                                                    <action selector="onDeletePressed:" destination="zMh-NE-3RF" eventType="touchUpInside" id="DOs-y9-gvt"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKP-8H-ePe">
+                                                <rect key="frame" x="66" y="35" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="onCancelPressed:" destination="zMh-NE-3RF" eventType="touchUpInside" id="aYD-YO-GRr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Mlu-6E-T2i"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="oof-jE-NGT" secondAttribute="trailing" id="KbD-Pj-5fx"/>
+                                    <constraint firstItem="oof-jE-NGT" firstAttribute="leading" secondItem="WwZ-DU-qzb" secondAttribute="leading" id="mrl-Sg-hKk"/>
+                                    <constraint firstAttribute="bottom" secondItem="oof-jE-NGT" secondAttribute="bottom" id="rgX-CI-6ue"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eO-GO-dEm">
+                                <rect key="frame" x="0.0" y="687" width="375" height="100"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="4" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-h0-bft">
+                                        <rect key="frame" x="-2" y="34" width="379" height="31"/>
+                                        <connections>
+                                            <action selector="isObjectSliderChanged:" destination="zMh-NE-3RF" eventType="valueChanged" id="1ON-UQ-HdT"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KTN-h0-bft" firstAttribute="centerX" secondItem="7eO-GO-dEm" secondAttribute="centerX" id="G1W-Pw-cHU"/>
+                                    <constraint firstAttribute="trailing" secondItem="KTN-h0-bft" secondAttribute="trailing" id="GHn-zd-0R1"/>
+                                    <constraint firstAttribute="height" constant="100" id="M3E-Do-vpQ"/>
+                                    <constraint firstItem="KTN-h0-bft" firstAttribute="top" secondItem="7eO-GO-dEm" secondAttribute="top" constant="34" id="PkG-Pw-98Q"/>
+                                    <constraint firstItem="KTN-h0-bft" firstAttribute="leading" secondItem="7eO-GO-dEm" secondAttribute="leading" id="yID-iP-jPH"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9O-KB-lW4">
                                 <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <subviews>
@@ -58,24 +113,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="oof-jE-NGT" firstAttribute="top" secondItem="WNs-65-jF4" secondAttribute="bottom" constant="-120" id="BRg-Jr-E1G"/>
+                            <constraint firstItem="7eO-GO-dEm" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="DzO-kG-Pwx"/>
                             <constraint firstAttribute="trailing" secondItem="k9O-KB-lW4" secondAttribute="trailing" id="IuR-oe-7V0"/>
                             <constraint firstAttribute="trailing" secondItem="zqy-NX-cCC" secondAttribute="trailing" id="TbO-lB-SV3"/>
                             <constraint firstAttribute="bottomMargin" secondItem="k9O-KB-lW4" secondAttribute="bottom" id="Xek-S5-Ra8"/>
+                            <constraint firstAttribute="trailing" secondItem="7eO-GO-dEm" secondAttribute="trailing" id="bRF-fr-Yae"/>
                             <constraint firstAttribute="bottomMargin" secondItem="zqy-NX-cCC" secondAttribute="bottom" id="dsu-pz-5f8"/>
+                            <constraint firstAttribute="trailing" secondItem="WwZ-DU-qzb" secondAttribute="trailing" id="jvY-TE-PI0"/>
+                            <constraint firstItem="WwZ-DU-qzb" firstAttribute="top" secondItem="1ra-kT-eYW" secondAttribute="top" id="kTD-gb-LlT"/>
                             <constraint firstItem="k9O-KB-lW4" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="lh7-dD-c7Z"/>
                             <constraint firstItem="zqy-NX-cCC" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="mJP-MD-q1P"/>
+                            <constraint firstItem="sDH-0O-toA" firstAttribute="top" secondItem="7eO-GO-dEm" secondAttribute="bottom" constant="-120" id="nm1-kT-qwJ"/>
+                            <constraint firstItem="WwZ-DU-qzb" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="q2N-1l-bUw"/>
                             <constraint firstItem="zqy-NX-cCC" firstAttribute="top" secondItem="1ra-kT-eYW" secondAttribute="topMargin" id="wAw-0E-UOd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addElementPanelBottomConstraint" destination="Xek-S5-Ra8" id="Rhc-0R-pSl"/>
+                        <outlet property="bottomObjectMenuPanel" destination="7eO-GO-dEm" id="h1g-cY-6r0"/>
+                        <outlet property="bottomObjectMenuPanelBottomLayoutConstraint" destination="nm1-kT-qwJ" id="bUn-4D-Nvu"/>
                         <outlet property="gameView" destination="zqy-NX-cCC" id="zPE-Bo-myR"/>
                         <outlet property="sceneMenuPanel" destination="k9O-KB-lW4" id="b8N-kw-rB5"/>
+                        <outlet property="topObjectMenuPanel" destination="oof-jE-NGT" id="gis-5i-msb"/>
+                        <outlet property="topObjectMenuPanelTopLayoutConstraint" destination="BRg-Jr-E1G" id="32f-be-KM7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6O9-Rd-xN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-818" y="55"/>
+            <point key="canvasLocation" x="-2175.1999999999998" y="-0.44977511244377816"/>
         </scene>
     </scenes>
 </document>

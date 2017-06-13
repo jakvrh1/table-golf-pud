@@ -17,7 +17,7 @@ class GameViewController: BaseViewController {
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
     
-    public var selectedLevel: Level?
+    public var level: Level?
     
     // MARK: Game initialization
     fileprivate var scene: GameScene? = nil {
@@ -27,19 +27,14 @@ class GameViewController: BaseViewController {
             scene?.delegate = self
         }
     }
-//    
-//    convenience init(levelIndex index: Int) {
-//        self.init()
-//        self.selectedLevel = index
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         /*scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))*/
-        if let selectedLevel = selectedLevel {
-            scene = GameScene(level: selectedLevel)
+        if let level = level {
+            scene = GameScene(level: level)
         } else {
-            scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
+            scene = GameScene(level: level ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
         }
         
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
@@ -50,7 +45,7 @@ class GameViewController: BaseViewController {
     }
     
     func popupLevelName() {
-        let alert = UIAlertController(title: "", message: selectedLevel?.levelName, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: level?.levelName, preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when){
@@ -109,7 +104,7 @@ extension GameViewController: GameSceneDelegate {
         
         controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
             
-            if let level = self.selectedLevel {
+            if let level = self.level {
                 self.scene = GameScene(level: level)
                 self.popupLevelName()
             }

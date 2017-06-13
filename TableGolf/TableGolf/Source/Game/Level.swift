@@ -13,10 +13,10 @@ class Level {
     static private(set) var allLevels: [Level] = []
     
     // Level objects
-    public let obstacles: [Obstacle]
-    public let exits: [Exit]
-    public let table: Table
-    public let coin: Coin
+    public var obstacles: [Obstacle]
+    public var exits: [Exit]
+    public var table: Table
+    public var coin: Coin
     
     let levelName: String
     
