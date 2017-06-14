@@ -29,32 +29,19 @@ class Level {
     var name: String = "New level"
     var id: UUID = UUID.init()
     
+//MARK: Initialization
+    
     init() {
         
     }
     
     convenience init(name: String, coin: Coin, table: Table, exits: [Exit], obstacles: [Obstacle]) {
         self.init()
+        self.name = name
         self.coin = coin
         self.exits = exits
         self.table = table
         self.obstacles = obstacles
-        
-        self.name = name
-
-    }
-    
-    static func saveLevel(level: Level) {
-        var newLevels = allLevels
-        newLevels.append(level)
-        loadedLevels = newLevels
-
-        serializeDataIntoJSON()
-    }
-    
-    static func removeLevel(index: Int) {
-        loadedLevels?.remove(at: index)
-        serializeDataIntoJSON()
     }
     
     private static func initializeLevels() {
@@ -98,6 +85,9 @@ class Level {
         loadedLevels = levels
     }
     
+//MARK: JSON
+    
+    // Place where JSON file will be stored
     private static var levelsFileURL: URL? {
         return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Levels.json")
     }
@@ -176,5 +166,20 @@ class Level {
                 loadedLevels = levels
             }
         }
+    }
+    
+//MARK: Storing options
+    
+    static func saveLevel(level: Level) {
+        var newLevels = allLevels
+        newLevels.append(level)
+        loadedLevels = newLevels
+        
+        serializeDataIntoJSON()
+    }
+    
+    static func removeLevel(index: Int) {
+        loadedLevels?.remove(at: index)
+        serializeDataIntoJSON()
     }
 }

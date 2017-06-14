@@ -21,16 +21,12 @@ class LevelsViewController: BaseViewController {
     var levels: [Level] = [Level]()
     
     
+//MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Level.deserializeDataFromJSON()
         levels = Level.allLevels
-        
-        for lvl in levels {
-            print(lvl.id.uuidString)
-            print("\n")
-        }
         
         setUpTableView()
     }
@@ -47,6 +43,7 @@ class LevelsViewController: BaseViewController {
 
 }
 
+//MARK: UITableView properties
 
 extension LevelsViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,14 +63,12 @@ extension LevelsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
             Level.removeLevel(index: indexPath.row)
             levels = Level.allLevels
             self.tableView?.reloadData()
         }
     }
 }
-
 
 extension LevelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -16,8 +16,4 @@ class LevelTableViewCell: UITableViewCell {
             levelNameLabel?.text = level?.name
         }
     }
-    
-
-    
-
 }

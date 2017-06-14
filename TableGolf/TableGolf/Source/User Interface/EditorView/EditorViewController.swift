@@ -59,6 +59,8 @@ class EditorViewController: BaseViewController {
     
     var scaleFactor:CGFloat = 1.0
     
+//MAKR: Initialization
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,41 +80,43 @@ class EditorViewController: BaseViewController {
         
     }
     
+//MARK: Constraints, buttons, gestures
+    
     func onSave() {
         if let scene = self.scene {
-            
-            let alert = UIAlertController(title: "", message: "Saved", preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
-            let when = DispatchTime.now() + 1
-            
             if scene.isCoinInExit() {
-                alert.message = "Coin cant be in exit"
+                let alert = UIAlertController(title: "", message: "Coin cant be in exit", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: when){
                     alert.dismiss(animated: true, completion: nil)
                 }
                 return
-            } else if !scene.isCoinOnTable() {
-                alert.message = "Coin is not on table"
+            }
+            
+            if !scene.isCoinOnTable() {
+                let alert = UIAlertController(title: "", message: "Coin needs to be on the table", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: when){
                     alert.dismiss(animated: true, completion: nil)
                 }
                 return
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
             }
         }
         
         let controller: UIAlertController = UIAlertController(title: "Level name: ", message: "", preferredStyle: .alert)
         
         controller.addTextField { text in
-            text.text = self.level?.name
             controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             
                 if let scene = self.scene {
                     let level = Level()
-                    level.name = text.text ?? "customLevel"
+                    if text.text == "" {
+                        level.name = "customLevel"
+                    } else {
+                        level.name = text.text ?? "customLevel"
+                    }
                     level.obstacles = scene.obstacles
                     level.exits = scene.exits
                     level.coin = scene.coin
@@ -165,24 +169,6 @@ class EditorViewController: BaseViewController {
         }
     }
     
-    func setMode(mode: Mode, animated: Bool) {
-        self.mode = mode
-        switch mode {
-        case .scene:
-            addElementPanelBottomConstraint?.constant = 0
-            topObjectMenuPanelTopLayoutConstraint?.constant = -(topObjectMenuPanel?.frame.size.height ?? 0)
-            bottomObjectMenuPanelBottomLayoutConstraint?.constant = -(bottomObjectMenuPanel?.frame.size.height ?? 0)
-        case .object:
-            addElementPanelBottomConstraint?.constant = -(sceneMenuPanel?.frame.size.height ?? 0)
-            topObjectMenuPanelTopLayoutConstraint?.constant = 0
-            bottomObjectMenuPanelBottomLayoutConstraint?.constant = 0
-        }
-        
-        UIView.animate(withDuration: animated ? 0.3 : 0) { 
-            self.view.layoutIfNeeded()
-        }
-    }
-    
     func changeObjectLocation() {
         if let object = selectedObject, let gameView = gameView {
             let locationMovement = PointTools.substract(gameView.convertViewToSceneCoordinates(location: currentLocation), gameView.convertViewToSceneCoordinates(location: startingLocation))
@@ -191,6 +177,7 @@ class EditorViewController: BaseViewController {
         }
     }
     
+    // Changes table size
     @IBAction func onSliderChange(_ sender: UISlider) {
         scene?.table.radius = CGFloat(sender.value)
         gameView?.setNeedsDisplay()
@@ -216,8 +203,9 @@ class EditorViewController: BaseViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    
+    // Deletes selected object
     @IBAction func onDeletePressed(_ sender: Any) {
+        // We make sure that coin and atleast one exit cant be deleted
         if (selectedObject as? Coin) != nil {
             return
         }
@@ -226,7 +214,6 @@ class EditorViewController: BaseViewController {
                 return
             }
         }
-        
         
         let controller: UIAlertController = UIAlertController(title: "Are you sure you want to delete this object?", message: "", preferredStyle: .alert)
         
@@ -246,7 +233,7 @@ class EditorViewController: BaseViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    
+    // Goes into scene mode and deselects object
     @IBAction func onCancelPressed(_ sender: Any) {
         setMode(mode: .scene, animated: true)
         
@@ -255,15 +242,35 @@ class EditorViewController: BaseViewController {
         gameView?.setNeedsDisplay()
     }
     
-    
+    // Change object size
     @IBAction func isObjectSliderChanged(_ sender: UISlider) {
-        
         if let object = selectedObject {
             object.radius = CGFloat(sender.value)
         }
         gameView?.setNeedsDisplay()
     }
+    
+    // Sets object or scene view
+    func setMode(mode: Mode, animated: Bool) {
+        self.mode = mode
+        switch mode {
+        case .scene:
+            addElementPanelBottomConstraint?.constant = 0
+            topObjectMenuPanelTopLayoutConstraint?.constant = -(topObjectMenuPanel?.frame.size.height ?? 0)
+            bottomObjectMenuPanelBottomLayoutConstraint?.constant = -(bottomObjectMenuPanel?.frame.size.height ?? 0)
+        case .object:
+            addElementPanelBottomConstraint?.constant = -(sceneMenuPanel?.frame.size.height ?? 0)
+            topObjectMenuPanelTopLayoutConstraint?.constant = 0
+            bottomObjectMenuPanelBottomLayoutConstraint?.constant = 0
+        }
+        
+        UIView.animate(withDuration: animated ? 0.3 : 0) {
+            self.view.layoutIfNeeded()
+        }
+    }
 }
+
+//MARK: Editor mode
 
 extension EditorViewController {
     enum Mode {

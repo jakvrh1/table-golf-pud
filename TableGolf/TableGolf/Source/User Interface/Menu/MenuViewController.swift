@@ -24,6 +24,7 @@ class MenuViewController: BaseViewController {
         label.text = Level.allLevels.first?.name ?? "No levels"
     }
 
+    // GameViewController
     @IBAction func playGameScene(_ sender: Any) {
         let controller: GameViewController = UIStoryboard(name: "Game", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         
@@ -31,6 +32,7 @@ class MenuViewController: BaseViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    // EditorViewController
     @IBAction func editLevel(_ sender: Any) {
         let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
         controller.level = selectedLevel
@@ -39,6 +41,7 @@ class MenuViewController: BaseViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    // NewLevel - EditorViewController
     @IBAction func newLevel(_ sender: Any) {
         let controller: EditorViewController = UIStoryboard(name: "Editor", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as! EditorViewController
         controller.delegate = self
@@ -46,16 +49,18 @@ class MenuViewController: BaseViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    // LevelsViewController
     @IBAction func selectLevel(_ sender: Any) {
         let controller: LevelsViewController = UIStoryboard(name: "Levels", bundle: nil).instantiateViewController(withIdentifier: "LevelsViewController") as!LevelsViewController
         
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
-    
 }
 
+
 extension MenuViewController: LevelsDelegate {
+    // Changes label text to selected level
     func didSelectLevel(sender: LevelsViewController, level: Level) {
         label.text = level.name
         selectedLevel = level
@@ -63,6 +68,7 @@ extension MenuViewController: LevelsDelegate {
 }
 
 extension MenuViewController: EditorDelegate {
+    // Changes label text to saved level
     func didSaveLevel(editor: EditorViewController, level: Level) {
         self.selectedLevel = level
         self.label.text = level.name

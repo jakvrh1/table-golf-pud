@@ -164,7 +164,6 @@ class GameScene: GameObject {
         self.init()
         table = Table(withCenter: CGPoint.zero, andRadius: 100)
         coin = Coin(withCenter: CGPoint.zero, andRadius: 4)
-        
     }
     
     func isCoinOnTable() -> Bool {
@@ -190,7 +189,6 @@ class GameScene: GameObject {
         
         return false
     }
-    
 }
 
 // MARK: Coin delegate

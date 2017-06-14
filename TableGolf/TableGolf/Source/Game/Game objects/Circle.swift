@@ -24,6 +24,7 @@ class Circle: GameObject {
         self.radius = radius
     }
     
+    // Used to initialize Circle object from JSON file
     convenience init(withDescriptor descriptor: [String: Any]) {
         self.init()
         

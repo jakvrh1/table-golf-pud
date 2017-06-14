@@ -47,7 +47,7 @@ class GameView: UIView {
         // Draw exits
         scene.exits.forEach({ exit in
             if exit === highlightedObject {
-                UIColor.white.setFill()
+                UIColor.gray.setFill()
             } else {
                 UIColor.black.setFill()
             }
@@ -57,7 +57,7 @@ class GameView: UIView {
         // Draw coin
         
         if scene.coin === highlightedObject {
-            UIColor.white.setFill()
+            UIColor.gray.setFill()
         } else {
             UIColor.yellow.setFill()
         }
@@ -66,7 +66,7 @@ class GameView: UIView {
         // Draw obstacles
         scene.obstacles.forEach({ obstacle in
             if obstacle === highlightedObject {
-                UIColor.white.setFill()
+                UIColor.gray.setFill()
             } else {
                 UIColor.blue.setFill()
             }

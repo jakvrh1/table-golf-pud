@@ -30,7 +30,6 @@ class GameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*scene = GameScene(level: selectedLevel ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))*/
         if let level = level {
             scene = GameScene(level: level)
         } else {
@@ -115,7 +114,7 @@ extension GameViewController: GameSceneDelegate {
     }
     
     func gameSceneDidFinishWithLose(sender: GameScene) {
-        let controller: UIAlertController = UIAlertController(title: "You lost!", message: "Try again", preferredStyle: .alert)
+        let controller: UIAlertController = UIAlertController(title: "You lost!", message: "", preferredStyle: .alert)
         
         controller.addAction(UIAlertAction(title: "Return to menu", style: .default, handler: { (action) in
             self.closeCurrentViewController()
@@ -134,6 +133,5 @@ extension GameViewController: GameSceneDelegate {
     func gameSceneDidChangeNumberOfMoves(sender: GameScene, to numberOfMoves: Int) {
         numberOfMovesLabel.text = "Moves: \(numberOfMoves)"
     }
-
 }
 
