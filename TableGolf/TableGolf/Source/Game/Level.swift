@@ -20,28 +20,26 @@ class Level {
         }
     }
     
-    /*static private var jsonDirectoryURL = FileManager.default.urls(for: .libraryDirectory , in: .userDomainMask).first*/
-    
     // Level objects
     var obstacles: [Obstacle] = [Obstacle]()
     var exits: [Exit] = [Exit]()
     var table: Table = Table(withCenter: CGPoint.zero, andRadius: 10.0)
     var coin: Coin = Coin(withCenter: CGPoint.zero, andRadius: 4.0)
     
-    var levelName: String = "New level"
+    var name: String = "New level"
     
     init() {
         
     }
     
-    convenience init(levelName: String, coin: Coin, table: Table, exits: [Exit], obstacles: [Obstacle]) {
+    convenience init(name: String, coin: Coin, table: Table, exits: [Exit], obstacles: [Obstacle]) {
         self.init()
         self.coin = coin
         self.exits = exits
         self.table = table
         self.obstacles = obstacles
         
-        self.levelName = levelName
+        self.name = name
     }
     
     static func saveLevel(level: Level) {
@@ -68,7 +66,7 @@ class Level {
         var table = Table(withCenter: CGPoint.zero, andRadius: 100)
         
         levels.append(
-            Level(levelName: "lvl1",
+            Level(name: "lvl1",
                   coin: Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4),
                   table: table,
                   exits: [Exit(withCenter: CGPoint(x: -90, y: 0), andRadius: 10)],
@@ -82,7 +80,7 @@ class Level {
         
         table = Table(withCenter: CGPoint.zero, andRadius: 100)
         levels.append(
-            Level(levelName: "lvl2",
+            Level(name: "lvl2",
                   coin: Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4),
                   table: table,
                   exits: [Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.6, radius: table.radius*0.9), andRadius: 10),
@@ -106,7 +104,7 @@ class Level {
         let levelsDescriptor: [[String: Any]] = self.allLevels.flatMap { level in
             var descriptor = [String: Any]()
             
-            descriptor["name"] = level.levelName
+            descriptor["name"] = level.name
 
             descriptor["coin"] = level.coin.descriptor
             
@@ -140,11 +138,10 @@ class Level {
             }
 
             let levels: [Level] = object.flatMap({ descriptor in
-                
                 let level = Level()
                 
                 if let name = descriptor["name"] as? String {
-                    level.levelName = name
+                    level.name = name
                 }
                 
                 if let coin = descriptor["coin"] as? [String: Any] {
@@ -166,6 +163,7 @@ class Level {
                 return level
                 
             })
+            // checks whether we had any levels in JSON file
             if levels.count == 0 {
                 loadedLevels = nil
             } else {

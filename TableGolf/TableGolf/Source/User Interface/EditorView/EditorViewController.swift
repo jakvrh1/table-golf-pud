@@ -63,7 +63,7 @@ class EditorViewController: BaseViewController {
         super.viewDidLoad()
 
         if level == nil {
-            level = Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: [])
+            level = Level(name: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [Exit(withCenter: CGPoint.zero, andRadius: 10)], obstacles: [])
         } else {
             gameView?.scene = scene
             gameView?.setNeedsDisplay()
@@ -79,13 +79,48 @@ class EditorViewController: BaseViewController {
     }
     
     func onSave() {
+        if let scene = self.scene {
+            if scene.isCoinInExit() {
+                let alert = UIAlertController(title: "", message: "Coin cant be in exit", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
+                return
+            }
+            
+            if !scene.isCoinOnTable() {
+                let alert = UIAlertController(title: "", message: "Coin must be in table", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
+                return
+            }
+        }
+        
         let controller: UIAlertController = UIAlertController(title: "Level name: ", message: "", preferredStyle: .alert)
         
         
-        controller.addTextField { (text) in
-            controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        controller.addTextField { text in
+            text.text = self.level?.name
+            controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                
+                
+                
+                // override level with same name
+                for (index, lvl) in Level.allLevels.enumerated() {
+                    if lvl.name == text.text {
+                        Level.removeLevel(index: index)
+                        break
+                    }
+                }
+                
+                
                 if let level = self.level, let scene = self.scene {
-                    level.levelName = text.text ?? "customLevel"
+                    level.name = text.text ?? "customLevel"
                     level.obstacles = scene.obstacles
                     level.exits = scene.exits
                     level.coin = scene.coin
@@ -100,6 +135,7 @@ class EditorViewController: BaseViewController {
             
         }))
         
+        
         present(controller, animated: true, completion: nil)
     }
     
@@ -112,30 +148,34 @@ class EditorViewController: BaseViewController {
                                                     radius: gameView.convertViewToSceneRadius(radius: 20.0))
                 gameView.highlightedObject = selectedObject
             }
+            gameView?.setNeedsDisplay()
             
-        } else {
+        } /*else if mode == .object {
             setMode(mode: .scene, animated: true)
             gameView?.highlightedObject = nil
             selectedObject = nil
-        }
+        }*/
        
-        gameView?.setNeedsDisplay()
+       
     }
     
     @objc private func onPanGesture(sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            startingLocation = sender.location(in: gameView)
-        case .changed:
-            currentLocation = sender.location(in: gameView)
-            changeObjectLocation()
-            startingLocation = sender.location(in: gameView)
-        case .ended, .cancelled:
-            currentLocation = sender.location(in: gameView)
-            changeObjectLocation()
-            startingLocation = sender.location(in: gameView)
-        case .failed, .possible:
-            break
+        // disable onPanGesture when object is not selected
+        if mode == .object {
+            switch sender.state {
+            case .began:
+                startingLocation = sender.location(in: gameView)
+            case .changed:
+                currentLocation = sender.location(in: gameView)
+                changeObjectLocation()
+                startingLocation = sender.location(in: gameView)
+            case .ended, .cancelled:
+                currentLocation = sender.location(in: gameView)
+                changeObjectLocation()
+                startingLocation = sender.location(in: gameView)
+            case .failed, .possible:
+                break
+            }
         }
     }
     
@@ -195,9 +235,15 @@ class EditorViewController: BaseViewController {
     
     
     @IBAction func onDeletePressed(_ sender: Any) {
-        if let coin = selectedObject as? Coin {
+        if (selectedObject as? Coin) != nil {
             return
         }
+        if scene?.exits.count == 1 {
+            if (selectedObject as? Exit) != nil {
+                return
+            }
+        }
+        
         
         let controller: UIAlertController = UIAlertController(title: "Are you sure you want to delete this object?", message: "", preferredStyle: .alert)
         
@@ -207,6 +253,7 @@ class EditorViewController: BaseViewController {
             }
             self.selectedObject = nil
             self.gameView?.setNeedsDisplay()
+            self.setMode(mode: .scene, animated: true)
         }))
         
         controller.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in

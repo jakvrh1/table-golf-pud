@@ -13,7 +13,7 @@ class LevelTableViewCell: UITableViewCell {
     
     var level: Level? {
         didSet {
-            levelNameLabel?.text = level?.levelName
+            levelNameLabel?.text = level?.name
         }
     }
     

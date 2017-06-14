@@ -167,13 +167,7 @@ class GameScene: GameObject {
         
     }
     
-}
-
-// MARK: Coin delegate
-
-extension GameScene: CoinDelegate {
-    
-    private func isCoinOnTable() -> Bool {
+    func isCoinOnTable() -> Bool {
         let length = PointTools.length(CGPoint(x: table.center.x - coin.center.x, y: table.center.y - coin.center.y))
         let maxLength = table.radius
         
@@ -184,7 +178,7 @@ extension GameScene: CoinDelegate {
         return true
     }
     
-    private func isCoinInExit() -> Bool {
+    func isCoinInExit() -> Bool {
         for exit in exits {
             let length = PointTools.length(CGPoint(x: exit.center.x - coin.center.x, y: exit.center.y - coin.center.y))
             let maxLength = exit.radius
@@ -196,6 +190,14 @@ extension GameScene: CoinDelegate {
         
         return false
     }
+    
+}
+
+// MARK: Coin delegate
+
+extension GameScene: CoinDelegate {
+    
+   
     
     func coinDidStopMoving(coin: Coin) {
         if !isCoinOnTable() {

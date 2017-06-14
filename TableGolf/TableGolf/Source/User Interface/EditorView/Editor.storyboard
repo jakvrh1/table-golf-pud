@@ -30,19 +30,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oof-jE-NGT">
-                                        <rect key="frame" x="0.0" y="-100" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="-80" width="375" height="80"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFa-X8-J4b">
-                                                <rect key="frame" x="250" y="35" width="63" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFa-X8-J4b">
+                                                <rect key="frame" x="230" y="25" width="45" height="30"/>
                                                 <state key="normal" title="Delete"/>
                                                 <connections>
                                                     <action selector="onDeletePressed:" destination="zMh-NE-3RF" eventType="touchUpInside" id="DOs-y9-gvt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKP-8H-ePe">
-                                                <rect key="frame" x="66" y="35" width="71" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKP-8H-ePe">
+                                                <rect key="frame" x="100" y="25" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="onCancelPressed:" destination="zMh-NE-3RF" eventType="touchUpInside" id="aYD-YO-GRr"/>
@@ -51,7 +49,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="Mlu-6E-T2i"/>
+                                            <constraint firstAttribute="height" constant="80" id="Mlu-6E-T2i"/>
+                                            <constraint firstAttribute="trailing" secondItem="IFa-X8-J4b" secondAttribute="trailing" constant="100" id="ZO6-Pd-SAQ"/>
+                                            <constraint firstItem="IFa-X8-J4b" firstAttribute="centerY" secondItem="oof-jE-NGT" secondAttribute="centerY" id="f6o-m0-Gaw"/>
+                                            <constraint firstItem="gKP-8H-ePe" firstAttribute="centerY" secondItem="oof-jE-NGT" secondAttribute="centerY" id="iYG-46-yZ9"/>
+                                            <constraint firstItem="gKP-8H-ePe" firstAttribute="leading" secondItem="oof-jE-NGT" secondAttribute="leading" constant="100" id="phO-yw-Zeo"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -66,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="687" width="375" height="100"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="4" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-h0-bft">
-                                        <rect key="frame" x="-2" y="34" width="379" height="31"/>
+                                        <rect key="frame" x="28" y="40" width="319" height="31"/>
                                         <connections>
                                             <action selector="isObjectSliderChanged:" destination="zMh-NE-3RF" eventType="valueChanged" id="1ON-UQ-HdT"/>
                                         </connections>
@@ -75,10 +77,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KTN-h0-bft" firstAttribute="centerX" secondItem="7eO-GO-dEm" secondAttribute="centerX" id="G1W-Pw-cHU"/>
-                                    <constraint firstAttribute="trailing" secondItem="KTN-h0-bft" secondAttribute="trailing" id="GHn-zd-0R1"/>
+                                    <constraint firstAttribute="trailing" secondItem="KTN-h0-bft" secondAttribute="trailing" constant="30" id="GHn-zd-0R1"/>
                                     <constraint firstAttribute="height" constant="100" id="M3E-Do-vpQ"/>
-                                    <constraint firstItem="KTN-h0-bft" firstAttribute="top" secondItem="7eO-GO-dEm" secondAttribute="top" constant="34" id="PkG-Pw-98Q"/>
-                                    <constraint firstItem="KTN-h0-bft" firstAttribute="leading" secondItem="7eO-GO-dEm" secondAttribute="leading" id="yID-iP-jPH"/>
+                                    <constraint firstItem="KTN-h0-bft" firstAttribute="top" secondItem="7eO-GO-dEm" secondAttribute="top" constant="40" id="PkG-Pw-98Q"/>
+                                    <constraint firstItem="KTN-h0-bft" firstAttribute="leading" secondItem="7eO-GO-dEm" secondAttribute="leading" constant="30" id="yID-iP-jPH"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9O-KB-lW4">
@@ -92,7 +94,7 @@
                                         </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="40" maxValue="4000" translatesAutoresizingMaskIntoConstraints="NO" id="IbM-hV-se8">
-                                        <rect key="frame" x="-2" y="0.0" width="379" height="31"/>
+                                        <rect key="frame" x="28" y="0.0" width="319" height="31"/>
                                         <connections>
                                             <action selector="onSliderChange:" destination="zMh-NE-3RF" eventType="valueChanged" id="i1X-cg-U89"/>
                                         </connections>
@@ -104,16 +106,16 @@
                                     <constraint firstItem="IbM-hV-se8" firstAttribute="top" secondItem="k9O-KB-lW4" secondAttribute="top" id="8qJ-Ux-OS9"/>
                                     <constraint firstAttribute="height" constant="100" id="Aoa-bN-N5D"/>
                                     <constraint firstItem="a5T-Lu-G4N" firstAttribute="leading" secondItem="k9O-KB-lW4" secondAttribute="leading" id="RKi-EG-5FH"/>
-                                    <constraint firstAttribute="trailing" secondItem="IbM-hV-se8" secondAttribute="trailing" id="SYx-nL-YFR"/>
+                                    <constraint firstAttribute="trailing" secondItem="IbM-hV-se8" secondAttribute="trailing" constant="30" id="SYx-nL-YFR"/>
                                     <constraint firstAttribute="trailing" secondItem="a5T-Lu-G4N" secondAttribute="trailing" id="TmQ-8r-hff"/>
                                     <constraint firstItem="a5T-Lu-G4N" firstAttribute="top" secondItem="IbM-hV-se8" secondAttribute="bottom" id="ZMA-7B-Jqj"/>
-                                    <constraint firstItem="IbM-hV-se8" firstAttribute="leading" secondItem="k9O-KB-lW4" secondAttribute="leading" id="oZn-Hu-CSx"/>
+                                    <constraint firstItem="IbM-hV-se8" firstAttribute="leading" secondItem="k9O-KB-lW4" secondAttribute="leading" constant="30" id="oZn-Hu-CSx"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oof-jE-NGT" firstAttribute="top" secondItem="WNs-65-jF4" secondAttribute="bottom" constant="-120" id="BRg-Jr-E1G"/>
+                            <constraint firstItem="oof-jE-NGT" firstAttribute="top" secondItem="WNs-65-jF4" secondAttribute="bottom" constant="-100" id="BRg-Jr-E1G"/>
                             <constraint firstItem="7eO-GO-dEm" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="DzO-kG-Pwx"/>
                             <constraint firstAttribute="trailing" secondItem="k9O-KB-lW4" secondAttribute="trailing" id="IuR-oe-7V0"/>
                             <constraint firstAttribute="trailing" secondItem="zqy-NX-cCC" secondAttribute="trailing" id="TbO-lB-SV3"/>

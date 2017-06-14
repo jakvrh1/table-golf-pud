@@ -30,6 +30,7 @@
 		21726A121EEEA83600F2E847 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A111EEEA83600F2E847 /* EditorViewController.swift */; };
 		21726A161EEEA91000F2E847 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21726A151EEEA91000F2E847 /* Editor.storyboard */; };
 		21726A191EEEC56700F2E847 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21726A181EEEC56700F2E847 /* BaseViewController.swift */; };
+		21726A1B1EF1305800F2E847 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21726A1A1EF1305800F2E847 /* LaunchScreen.storyboard */; };
 		21B28BDA1EE7D8E000BE4E88 /* PointTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B28BD91EE7D8E000BE4E88 /* PointTools.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		21726A111EEEA83600F2E847 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditorViewController.swift; path = "TableGolf/Source/User Interface/EditorView/EditorViewController.swift"; sourceTree = SOURCE_ROOT; };
 		21726A151EEEA91000F2E847 /* Editor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Editor.storyboard; path = "TableGolf/Source/User Interface/EditorView/Editor.storyboard"; sourceTree = SOURCE_ROOT; };
 		21726A181EEEC56700F2E847 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		21726A1A1EF1305800F2E847 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21B28BD91EE7D8E000BE4E88 /* PointTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				21726A181EEEC56700F2E847 /* BaseViewController.swift */,
+				21726A1A1EF1305800F2E847 /* LaunchScreen.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				214EF59C1EEAB768007A4E45 /* Game.storyboard in Resources */,
 				21706BE21EE555C900408CC0 /* Assets.xcassets in Resources */,
 				21726A161EEEA91000F2E847 /* Editor.storyboard in Resources */,
+				21726A1B1EF1305800F2E847 /* LaunchScreen.storyboard in Resources */,
 				214EF5931EEA9C6F007A4E45 /* Menu.storyboard in Resources */,
 				21726A081EEE638500F2E847 /* Levels.storyboard in Resources */,
 			);

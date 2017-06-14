@@ -34,7 +34,7 @@ class GameViewController: BaseViewController {
         if let level = level {
             scene = GameScene(level: level)
         } else {
-            scene = GameScene(level: level ?? Level(levelName: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
+            scene = GameScene(level: level ?? Level(name: "", coin: Coin(withCenter: CGPoint.zero, andRadius: 4.0), table: Table(withCenter: CGPoint.zero, andRadius: 100.0), exits: [], obstacles: []))
         }
         
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
@@ -45,7 +45,7 @@ class GameViewController: BaseViewController {
     }
     
     func popupLevelName() {
-        let alert = UIAlertController(title: "", message: level?.levelName, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: level?.name, preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when){

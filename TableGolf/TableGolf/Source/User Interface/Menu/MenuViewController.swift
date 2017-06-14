@@ -21,7 +21,7 @@ class MenuViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedLevel = Level.allLevels.first
-        label.text = Level.allLevels.first?.levelName ?? "No levels"
+        label.text = Level.allLevels.first?.name ?? "No levels"
     }
 
     @IBAction func playGameScene(_ sender: Any) {
@@ -57,7 +57,7 @@ class MenuViewController: BaseViewController {
 
 extension MenuViewController: LevelsDelegate {
     func didSelectLevel(sender: LevelsViewController, level: Level) {
-        label.text = level.levelName
+        label.text = level.name
         selectedLevel = level
     }
 }
@@ -65,6 +65,6 @@ extension MenuViewController: LevelsDelegate {
 extension MenuViewController: EditorDelegate {
     func didSaveLevel(editor: EditorViewController, level: Level) {
         self.selectedLevel = level
-        self.label.text = level.levelName
+        self.label.text = level.name
     }
 }
