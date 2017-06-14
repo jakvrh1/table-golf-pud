@@ -27,12 +27,10 @@ class LevelsViewController: BaseViewController {
         Level.deserializeDataFromJSON()
         levels = Level.allLevels
         
-       /* for lvl in levels {
-            print(lvl.levelName)
-            print(lvl.obstacles.count)
-            
+        for lvl in levels {
+            print(lvl.id.uuidString)
             print("\n")
-        }*/
+        }
         
         setUpTableView()
     }
@@ -61,14 +59,6 @@ extension LevelsViewController: UITableViewDataSource {
         cell.level = levels[indexPath.row]
         return cell
     }
-    
-    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        <#code#>
-    }*/
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

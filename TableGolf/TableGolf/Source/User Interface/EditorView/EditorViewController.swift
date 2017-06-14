@@ -80,46 +80,38 @@ class EditorViewController: BaseViewController {
     
     func onSave() {
         if let scene = self.scene {
-            if scene.isCoinInExit() {
-                let alert = UIAlertController(title: "", message: "Coin cant be in exit", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 1
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
-                return
-            }
             
-            if !scene.isCoinOnTable() {
-                let alert = UIAlertController(title: "", message: "Coin must be in table", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 1
+            let alert = UIAlertController(title: "", message: "Saved", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let when = DispatchTime.now() + 1
+            
+            if scene.isCoinInExit() {
+                alert.message = "Coin cant be in exit"
                 DispatchQueue.main.asyncAfter(deadline: when){
                     alert.dismiss(animated: true, completion: nil)
                 }
                 return
+            } else if !scene.isCoinOnTable() {
+                alert.message = "Coin is not on table"
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
+                return
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
             }
         }
         
         let controller: UIAlertController = UIAlertController(title: "Level name: ", message: "", preferredStyle: .alert)
         
-        
         controller.addTextField { text in
             text.text = self.level?.name
             controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                
-                
-                
-                // override level with same name
-                for (index, lvl) in Level.allLevels.enumerated() {
-                    if lvl.name == text.text {
-                        Level.removeLevel(index: index)
-                        break
-                    }
-                }
-                
-                
-                if let level = self.level, let scene = self.scene {
+            
+                if let scene = self.scene {
+                    let level = Level()
                     level.name = text.text ?? "customLevel"
                     level.obstacles = scene.obstacles
                     level.exits = scene.exits
@@ -140,6 +132,7 @@ class EditorViewController: BaseViewController {
     }
     
     @objc private func onTap(sender: UIGestureRecognizer) {
+        // disable onTap when object is selected
         if mode == .scene {
             setMode(mode: .object, animated: true)
             if let gameView = gameView, let scene = scene {
@@ -149,14 +142,7 @@ class EditorViewController: BaseViewController {
                 gameView.highlightedObject = selectedObject
             }
             gameView?.setNeedsDisplay()
-            
-        } /*else if mode == .object {
-            setMode(mode: .scene, animated: true)
-            gameView?.highlightedObject = nil
-            selectedObject = nil
-        }*/
-       
-       
+        }
     }
     
     @objc private func onPanGesture(sender: UIGestureRecognizer) {
@@ -190,8 +176,6 @@ class EditorViewController: BaseViewController {
             addElementPanelBottomConstraint?.constant = -(sceneMenuPanel?.frame.size.height ?? 0)
             topObjectMenuPanelTopLayoutConstraint?.constant = 0
             bottomObjectMenuPanelBottomLayoutConstraint?.constant = 0
-            
-            
         }
         
         UIView.animate(withDuration: animated ? 0.3 : 0) { 
@@ -206,7 +190,6 @@ class EditorViewController: BaseViewController {
             gameView.setNeedsDisplay()
         }
     }
-    
     
     @IBAction func onSliderChange(_ sender: UISlider) {
         scene?.table.radius = CGFloat(sender.value)

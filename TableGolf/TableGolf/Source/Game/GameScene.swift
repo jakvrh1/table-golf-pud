@@ -196,9 +196,6 @@ class GameScene: GameObject {
 // MARK: Coin delegate
 
 extension GameScene: CoinDelegate {
-    
-   
-    
     func coinDidStopMoving(coin: Coin) {
         if !isCoinOnTable() {
             delegate?.gameSceneDidFinishWithLose(sender: self)

@@ -27,6 +27,7 @@ class Level {
     var coin: Coin = Coin(withCenter: CGPoint.zero, andRadius: 4.0)
     
     var name: String = "New level"
+    var id: UUID = UUID.init()
     
     init() {
         
@@ -40,6 +41,7 @@ class Level {
         self.obstacles = obstacles
         
         self.name = name
+
     }
     
     static func saveLevel(level: Level) {
@@ -104,6 +106,8 @@ class Level {
         let levelsDescriptor: [[String: Any]] = self.allLevels.flatMap { level in
             var descriptor = [String: Any]()
             
+            descriptor["id"] = level.id.uuidString
+            
             descriptor["name"] = level.name
 
             descriptor["coin"] = level.coin.descriptor
@@ -130,8 +134,6 @@ class Level {
     }
     
     static func deserializeDataFromJSON() {
-        // print(try! JSONSerialization.jsonObject(with: (try! Data(contentsOf: jsonFilePath!)), options: .allowFragments))
-
         if let url = levelsFileURL, let data = try? Data(contentsOf: url) {
             guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
                 return
@@ -139,6 +141,10 @@ class Level {
 
             let levels: [Level] = object.flatMap({ descriptor in
                 let level = Level()
+                
+                if let id = descriptor["id"] as? String {
+                    level.id = UUID.init(uuidString: id)!
+                }
                 
                 if let name = descriptor["name"] as? String {
                     level.name = name
@@ -151,7 +157,7 @@ class Level {
                 if let table = descriptor["table"] as? [String: Any] {
                     level.table = Table(withDescriptor: table)
                 }
-                
+   
                 if let obstacles = descriptor["obstacles"] as? [[String: Any]] {
                     level.obstacles = obstacles.flatMap { Obstacle(withDescriptor: $0) }
                 }
