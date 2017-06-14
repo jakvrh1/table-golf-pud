@@ -16,7 +16,7 @@ class LevelsViewController: BaseViewController {
 
     public weak var delegate: LevelsDelegate?
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView?
     
     var levels: [Level] = [Level]()
     
@@ -24,7 +24,15 @@ class LevelsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Level.deserializeDataFromJSON()
         levels = Level.allLevels
+        
+       /* for lvl in levels {
+            print(lvl.levelName)
+            print(lvl.obstacles.count)
+            
+            print("\n")
+        }*/
         
         setUpTableView()
     }
@@ -52,6 +60,27 @@ extension LevelsViewController: UITableViewDataSource {
         
         cell.level = levels[indexPath.row]
         return cell
+    }
+    
+    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        <#code#>
+    }*/
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            Level.removeLevel(index: indexPath.row)
+            levels = Level.allLevels
+            self.tableView?.reloadData()
+        }
     }
 }
 

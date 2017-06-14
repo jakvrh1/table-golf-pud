@@ -27,7 +27,7 @@ class Circle: GameObject {
     convenience init(withDescriptor descriptor: [String: Any]) {
         self.init()
         
-        if let center = descriptor["center"] as? [String: Any], let x = center["x"] as? Float, let y = center["x"] as? Float {
+        if let center = descriptor["center"] as? [String: Any], let x = center["x"] as? Float, let y = center["y"] as? Float {
             self.center = CGPoint(x: CGFloat(x), y: CGFloat(y))
         }
         if let radius = descriptor["radius"] as? Float {
