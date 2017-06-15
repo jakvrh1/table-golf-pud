@@ -28,6 +28,11 @@ class LevelsViewController: BaseViewController {
         Level.deserializeDataFromJSON()
         levels = Level.allLevels
         
+        for lvl in levels {
+            print(lvl.id)
+            print("\n")
+        }
+        
         setUpTableView()
     }
     

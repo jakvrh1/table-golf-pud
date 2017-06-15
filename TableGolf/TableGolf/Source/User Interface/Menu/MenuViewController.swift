@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class MenuViewController: BaseViewController {
 
@@ -22,6 +23,33 @@ class MenuViewController: BaseViewController {
         super.viewDidLoad()
         selectedLevel = Level.allLevels.first
         label.text = Level.allLevels.first?.name ?? "No levels"
+        
+        /*
+ 
+         Need to read file from mail
+ 
+         */
+        
+       /* let bundle = Bundle.main
+        let path = bundle.path(forResource: "Level", ofType: "cdl")
+        if path?.isEmpty ?? true{
+            print("Empty")
+        } else {
+            if let data = try? Data(contentsOf: path) {
+                
+            }
+        }*/
+        if Bundle.main.isLoaded {
+            //print("YES")
+            let fileURL = Bundle.main.url(forResource:"Level", withExtension: "cdl")
+            if fileURL != nil {
+                print("YES")
+                Level.deserializeDataFromJSON(url: fileURL!)
+            }
+        }
+        /*let fileURL = Bundle.main.url(forResource:"Level", withExtension: "cdl"*/
+      
+        
     }
 
     // GameViewController
@@ -55,6 +83,40 @@ class MenuViewController: BaseViewController {
         
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func shareLevel(_ sender: Any) {
+        if !MFMailComposeViewController.canSendMail() {
+            print("NOPE")
+            return
+        }
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.setToRecipients(["jakvrh1@gmail.com"])
+        composeVC.setSubject("Table Golf level")
+        composeVC.setMessageBody("Try out my level!", isHTML: false)
+        
+        if let level = selectedLevel {
+            Level.serializeDataIntoJSON(levels: [level])
+            
+            composeVC.addAttachmentData(Level.levelData(level: level), mimeType: "cdl", fileName: "Level.cdl")
+        }
+        
+        //Level.levelData(level: <#T##Level#>)
+        
+        // Present the view controller modally.
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    
+    
+}
+
+extension MenuViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

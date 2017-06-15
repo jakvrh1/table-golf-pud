@@ -83,56 +83,50 @@ class EditorViewController: BaseViewController {
 //MARK: Constraints, buttons, gestures
     
     func onSave() {
+        guard let scene = self.scene else {
+            return // Nothing to do here
+        }
+        
+        guard let level = self.level else {
+            return // Nothing to do here
+        }
+        
+        // Coin must not be on exit
+        guard !scene.isCoinInExit() else {
+            AlertView.showMessage(message: "Coin can't be in exit", forDuration: 1.0, inController: self)
+            return
+        }
+        
+        // Coin must be on table
+        guard scene.isCoinOnTable() else {
+            AlertView.showMessage(message: "Coin needs to be on the table", forDuration: 1.0, inController: self)
+            return
+        }
+        
+        // Insert name
+        AlertView.showTextInput(title: "Select level name", message: "", textFieldText: self.level?.name, inController: self) { newName in
+            let name = newName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "New level": newName
+            
+            
+            if Level.doesLevelWithIDExist(id: self.level?.id) {
+                // Let user decide if he wants to override level
+                AlertView.showOverride(title: "Override", message: "", inController: self, completion: { override in
+                    self.saveCreatedLevel(level: level, levelName: name, override: override)
+                })
+            } else {
+                self.saveCreatedLevel(level: level, levelName: name, override: false)
+            }
+        }
+    }
+    
+    // Save and use level
+    func saveCreatedLevel(level lvl: Level, levelName: String, override: Bool) {
         if let scene = self.scene {
-            if scene.isCoinInExit() {
-                let alert = UIAlertController(title: "", message: "Coin cant be in exit", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 1
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
-                return
-            }
-            
-            if !scene.isCoinOnTable() {
-                let alert = UIAlertController(title: "", message: "Coin needs to be on the table", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 1
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
-                return
-            }
+            let level = scene.constructScene(level: lvl, override: override)
+            level.name = levelName
+            Level.saveLevel(level: level)
+            self.delegate?.didSaveLevel(editor: self, level: level)
         }
-        
-        let controller: UIAlertController = UIAlertController(title: "Level name: ", message: "", preferredStyle: .alert)
-        
-        controller.addTextField { text in
-            controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            
-                if let scene = self.scene {
-                    let level = Level()
-                    if text.text == "" {
-                        level.name = "customLevel"
-                    } else {
-                        level.name = text.text ?? "customLevel"
-                    }
-                    level.obstacles = scene.obstacles
-                    level.exits = scene.exits
-                    level.coin = scene.coin
-                    level.table = scene.table
-                    Level.saveLevel(level: level)
-                    self.delegate?.didSaveLevel(editor: self, level: level)
-                }
-            }))
-        }
-        
-        controller.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
-            
-        }))
-        
-        
-        present(controller, animated: true, completion: nil)
     }
     
     @objc private func onTap(sender: UIGestureRecognizer) {
@@ -184,7 +178,7 @@ class EditorViewController: BaseViewController {
     }
     
     
-    @IBAction func onAddPressed(_ sender: Any) {
+    @IBAction func onAddPressed(_ sender: UIButton) {
         let controller: UIAlertController = UIAlertController(title: "Add objects", message: "", preferredStyle: .actionSheet)
         
         controller.addAction(UIAlertAction(title: "Exit", style: .default, handler: { (action) in
@@ -199,7 +193,11 @@ class EditorViewController: BaseViewController {
         
         controller.addAction(UIAlertAction(title: "Cancle", style: .default, handler: { (action) in
         }))
-
+        
+        // Use popover for tablets else it crashes
+        controller.popoverPresentationController?.sourceView = sender.superview
+        controller.popoverPresentationController?.sourceRect = sender.frame
+        
         present(controller, animated: true, completion: nil)
     }
     

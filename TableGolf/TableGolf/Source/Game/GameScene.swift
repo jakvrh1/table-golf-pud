@@ -147,6 +147,26 @@ class GameScene: GameObject {
         }
     }
     
+    func constructScene(level: Level, override: Bool) -> Level{
+        if override {
+            Level.removeLevel(level: level)
+            level.obstacles = obstacles
+            level.exits = exits
+            level.coin  = coin
+            level.table = table
+            return level
+        } else {
+            let level = Level()
+           
+            level.obstacles = obstacles
+            level.exits = exits
+            level.coin = coin
+            level.table = table
+            
+            return level
+        }
+    }
+    
 // MARK: Initialization
  
     convenience init(level: Level) {
