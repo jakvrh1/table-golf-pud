@@ -24,31 +24,27 @@ class MenuViewController: BaseViewController {
         selectedLevel = Level.allLevels.first
         label.text = Level.allLevels.first?.name ?? "No levels"
         
-        /*
- 
-         Need to read file from mail
- 
-         */
         
-       /* let bundle = Bundle.main
-        let path = bundle.path(forResource: "Level", ofType: "cdl")
-        if path?.isEmpty ?? true{
-            print("Empty")
-        } else {
-            if let data = try? Data(contentsOf: path) {
+      
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        if let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first?.path {
+            let path = dir + "/sharedLevel.cdl"
+            
+            if FileManager.default.fileExists(atPath: path) {
                 
-            }
-        }*/
-        if Bundle.main.isLoaded {
-            //print("YES")
-            let fileURL = Bundle.main.url(forResource:"Level", withExtension: "cdl")
-            if fileURL != nil {
-                print("YES")
-                Level.deserializeDataFromJSON(url: fileURL!)
+                let levels = Level.deserializeDataFromJSON(url: URL(fileURLWithPath: path))
+                Level.addLevels(levels: levels)
+                Level.saveAll()
+                
+                try? FileManager.default.removeItem(atPath: path)
             }
         }
-        /*let fileURL = Bundle.main.url(forResource:"Level", withExtension: "cdl"*/
-      
         
     }
 
@@ -99,7 +95,7 @@ class MenuViewController: BaseViewController {
         composeVC.setMessageBody("Try out my level!", isHTML: false)
         
         if let level = selectedLevel {
-            Level.serializeDataIntoJSON(levels: [level])
+            Level.serializeDataIntoJSON(levels: [level], path: .level)
             
             composeVC.addAttachmentData(Level.levelData(level: level), mimeType: "cdl", fileName: "Level.cdl")
         }

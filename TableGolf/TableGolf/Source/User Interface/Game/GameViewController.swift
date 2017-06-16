@@ -18,6 +18,7 @@ class GameViewController: BaseViewController {
     private var scaleFactor: CGFloat = 1.0
     
     public var level: Level?
+    private var cameraModeFullScene: Bool = false
     
     // MARK: Game initialization
     fileprivate var scene: GameScene? = nil {
@@ -37,10 +38,25 @@ class GameViewController: BaseViewController {
         }
         
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
-        //gameView?.cameraMode = .followCoin(scale: 10.0)
-        gameView?.cameraMode = .fullScene
+        gameView?.cameraMode = .followCoin(scale: 10.0)
+        //gameView?.cameraMode = .fullScene
+        
+        let doubleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        gameView?.addGestureRecognizer(doubleTap)
 
         popupLevelName()
+    }
+    
+    @objc private func onDoubleTap(sender: UITapGestureRecognizer) {
+        if cameraModeFullScene {
+            gameView?.cameraMode = .followCoin(scale: 10.0)
+            cameraModeFullScene = false
+        } else {
+            gameView?.cameraMode = .fullScene
+            cameraModeFullScene = true
+        }
+        gameView?.setNeedsDisplay()
     }
     
     func popupLevelName() {
@@ -66,20 +82,23 @@ class GameViewController: BaseViewController {
     
     // MARK: Game gestures
     @objc private func onPanGesture(sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            arrowStartLocation = sender.location(in: gameView)
-        case .changed:
-            arrowCurrentLocation = sender.location(in: gameView)
-            applyLaunchParameters()
-        case .ended, .cancelled:
-            arrowCurrentLocation = sender.location(in: gameView)
-            applyLaunchParameters()
-            scene?.launch()
-        case .failed, .possible:
-            break
+        if !cameraModeFullScene {
+            switch sender.state {
+            case .began:
+                arrowStartLocation = sender.location(in: gameView)
+            case .changed:
+                arrowCurrentLocation = sender.location(in: gameView)
+                applyLaunchParameters()
+            case .ended, .cancelled:
+                arrowCurrentLocation = sender.location(in: gameView)
+                applyLaunchParameters()
+                scene?.launch()
+            case .failed, .possible:
+                break
+            }
+            gameView?.setNeedsDisplay()
         }
-        gameView?.setNeedsDisplay()
+        
     }
     
     private func applyLaunchParameters() {
@@ -99,9 +118,9 @@ extension GameViewController: GameSceneDelegate {
     }
     
     func gameSceneDidFinishWithVictory(sender: GameScene) {
-        let controller: UIAlertController = UIAlertController(title: "You win!", message: "You advance to next lvl", preferredStyle: .alert)
+        let controller: UIAlertController = UIAlertController(title: "You win!", message: "", preferredStyle: .alert)
         
-        controller.addAction(UIAlertAction(title: "Next lvl", style: .default, handler: { (action) in
+        controller.addAction(UIAlertAction(title: "Try again", style: .default, handler: { (action) in
             
             if let level = self.level {
                 self.scene = GameScene(level: level)

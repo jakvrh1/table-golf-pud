@@ -72,7 +72,14 @@ class EditorViewController: BaseViewController {
         }
         
         gameView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPanGesture)))
-        gameView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
+        
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        singleTap.numberOfTapsRequired = 1
+        gameView?.addGestureRecognizer(singleTap)
+        
+        let doubleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        gameView?.addGestureRecognizer(doubleTap)
         
         gameView?.cameraMode = .fullScene
         
@@ -129,7 +136,16 @@ class EditorViewController: BaseViewController {
         }
     }
     
+    @objc private func onDoubleTap(sender: UIGestureRecognizer) {
+        setMode(mode: .scene, animated: true)
+        gameView?.highlightedObject = nil
+        gameView?.setNeedsDisplay()
+        
+    }
+    
+    
     @objc private func onTap(sender: UIGestureRecognizer) {
+        print("HERE1")
         // disable onTap when object is selected
         if mode == .scene {
             setMode(mode: .object, animated: true)

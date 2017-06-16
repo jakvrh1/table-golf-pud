@@ -117,41 +117,20 @@ class Level {
         return FileManager.default.temporaryDirectory.absoluteURL.appendingPathComponent("Level.cdl")
     }
     
-    static func serializeDataIntoJSON() {
-        let levelsDescriptor: [[String: Any]] = self.allLevels.flatMap { level in
-            var descriptor = [String: Any]()
-            
-            descriptor["id"] = level.id
-            
-            descriptor["name"] = level.name
-
-            descriptor["coin"] = level.coin.descriptor
-            
-            let exitsDescriptor: [[String: Any]] = level.exits.flatMap{ exit in
-                return exit.descriptor
-            }
-            descriptor["exits"] = exitsDescriptor
-            
-            let obstaclesDescriptor: [[String: Any]] = level.obstacles.flatMap{ obstacle in
-                return obstacle.descriptor
-            }
-            descriptor["obstacles"] = obstaclesDescriptor
-            
-            descriptor["table"] = level.table.descriptor
-            
-            return descriptor
+    static func serializeDataIntoJSON(levels: [Level], path: Path) {
+        var levelsToJSON = [Level]()
+        var url: URL
+        
+        switch path {
+        case .allLevels:
+            levelsToJSON = self.allLevels
+            url = levelsFileURL!
+        case .level:
+            levelsToJSON = levels
+            url = levelFileURL
         }
         
-        if let url = levelsFileURL, let jsonData = try? JSONSerialization.data(withJSONObject: levelsDescriptor, options: .prettyPrinted) {
-            try? jsonData.write(to: url)
-        }
-        
-    }
-    
-    
-    
-    static func serializeDataIntoJSON(levels: [Level]) {
-        let levelsDescriptor: [[String: Any]] = levels.flatMap { level in
+        let levelsDescriptor: [[String: Any]] = levelsToJSON.flatMap { level in
             var descriptor = [String: Any]()
             
             descriptor["id"] = level.id
@@ -175,15 +154,13 @@ class Level {
             return descriptor
         }
         
-        if let url = levelFileURL, let jsonData = try? JSONSerialization.data(withJSONObject: levelsDescriptor, options: .prettyPrinted) {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: levelsDescriptor, options: .prettyPrinted) {
             try? jsonData.write(to: url)
         }
         
     }
     
     static func levelData(level: Level) -> Data {
-        serializeDataIntoJSON(levels: [level])
-        if let url = levelFileURL, let data = try? Data(contentsOf: url) {
             return data
         }
         
@@ -230,8 +207,6 @@ class Level {
             if levels.count == 0 {
                 loadedLevels = nil
             } else {
-                if self.loadedLevels != nil {
-                    loadedLevels? += levels
                 }
             }
         }
@@ -239,7 +214,6 @@ class Level {
 
     
     static func deserializeDataFromJSON() {
-        if let url = levelsFileURL, let data = try? Data(contentsOf: url) {
             guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
                 return
             }
@@ -295,7 +269,6 @@ class Level {
         newLevels.append(level)
         loadedLevels = newLevels
         
-        serializeDataIntoJSON()
     }
     
     static func removeLevel(level: Level) {
@@ -308,6 +281,5 @@ class Level {
     
     static func removeLevel(index: Int) {
         loadedLevels?.remove(at: index)
-        serializeDataIntoJSON()
     }
 }
