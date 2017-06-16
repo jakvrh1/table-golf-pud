@@ -29,7 +29,7 @@ class Level {
     var name: String = "New level"
     var id: String = UUID().uuidString
     
-//MARK: Initialization
+    //MARK: Initialization
     
     init() {
         
@@ -66,6 +66,7 @@ class Level {
     }
     
     private static func initializeLevels() {
+        print("Levels initialized")
         deserializeDataFromJSON()
         
         if loadedLevels != nil{
@@ -106,14 +107,14 @@ class Level {
         loadedLevels = levels
     }
     
-//MARK: JSON
+    //MARK: JSON
     
     // Place where JSON file will be stored
     private static var levelsFileURL: URL? {
         return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Levels.json")
     }
     
-    private static var levelFileURL: URL? {
+    private static var levelFileURL: URL {
         return FileManager.default.temporaryDirectory.absoluteURL.appendingPathComponent("Level.cdl")
     }
     
@@ -157,18 +158,93 @@ class Level {
         if let jsonData = try? JSONSerialization.data(withJSONObject: levelsDescriptor, options: .prettyPrinted) {
             try? jsonData.write(to: url)
         }
-        
     }
     
     static func levelData(level: Level) -> Data {
+        serializeDataIntoJSON(levels: [level], path: .level)
+        if let data = try? Data(contentsOf: levelFileURL) {
             return data
         }
         
         return Data()
     }
     
-    static func deserializeDataFromJSON(url: URL) {
+    static func deserializeDataFromJSON(url: URL) -> [Level] {
         if let data = try? Data(contentsOf: url) {
+            guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
+                return []
+            }
+            
+            let levels: [Level] = object.flatMap({ descriptor in
+                let level = Level()
+                
+                if let id = descriptor["id"] as? String {
+                    level.id = id
+                    //print("ID \(id)")
+                }
+                
+                if let name = descriptor["name"] as? String {
+                    level.name = name
+                    //print("name \(name)")
+                }
+                
+                if let coin = descriptor["coin"] as? [String: Any] {
+                    level.coin = Coin(withDescriptor: coin)
+                }
+                
+                if let table = descriptor["table"] as? [String: Any] {
+                    level.table = Table(withDescriptor: table)
+                }
+                
+                if let obstacles = descriptor["obstacles"] as? [[String: Any]] {
+                    level.obstacles = obstacles.flatMap { Obstacle(withDescriptor: $0) }
+                }
+                
+                if let exits = descriptor["exits"] as? [[String: Any]] {
+                    level.exits = exits.flatMap { Exit(withDescriptor: $0) }
+                }
+                
+                return level
+                
+            })
+            // checks whether we had any levels in JSON file
+            /*if levels.count == 0 {
+             loadedLevels = nil
+             } else {
+             if let loadedLevels = self.loadedLevels {
+             let newLevels = loadedLevels + levels
+             print(newLevels.count)
+             self.loadedLevels = newLevels
+             }
+             }*/
+            return levels
+            
+        }
+        return []
+    }
+    
+    static func saveAll() {
+        if let loadedLevels = loadedLevels {
+            serializeDataIntoJSON(levels: loadedLevels, path: .allLevels)
+        }
+        
+    }
+    
+    static func addLevels(levels: [Level]) {
+        if levels.count == 0 {
+            loadedLevels = nil
+        } else {
+            if let loadedLevels = self.loadedLevels {
+                let newLevels = loadedLevels + levels
+                print(newLevels.count)
+                self.loadedLevels = newLevels
+            }
+        }
+    }
+    
+    
+    static func deserializeDataFromJSON() {
+        if let data = try? Data(contentsOf: levelsFileURL!) {
             guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
                 return
             }
@@ -207,51 +283,6 @@ class Level {
             if levels.count == 0 {
                 loadedLevels = nil
             } else {
-                }
-            }
-        }
-    }
-
-    
-    static func deserializeDataFromJSON() {
-            guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
-                return
-            }
-
-            let levels: [Level] = object.flatMap({ descriptor in
-                let level = Level()
-                
-                if let id = descriptor["id"] as? String {
-                    level.id = id
-                }
-                
-                if let name = descriptor["name"] as? String {
-                    level.name = name
-                }
-                
-                if let coin = descriptor["coin"] as? [String: Any] {
-                    level.coin = Coin(withDescriptor: coin)
-                }
-                
-                if let table = descriptor["table"] as? [String: Any] {
-                    level.table = Table(withDescriptor: table)
-                }
-   
-                if let obstacles = descriptor["obstacles"] as? [[String: Any]] {
-                    level.obstacles = obstacles.flatMap { Obstacle(withDescriptor: $0) }
-                }
-                
-                if let exits = descriptor["exits"] as? [[String: Any]] {
-                    level.exits = exits.flatMap { Exit(withDescriptor: $0) }
-                }
-                
-                return level
-                
-            })
-            // checks whether we had any levels in JSON file
-            if levels.count == 0 {
-                loadedLevels = nil
-            } else {
                 loadedLevels = levels
             }
         }
@@ -262,13 +293,14 @@ class Level {
         
     }
     
-//MARK: Storing options
+    //MARK: Storing options
     
     static func saveLevel(level: Level) {
         var newLevels = allLevels
         newLevels.append(level)
         loadedLevels = newLevels
         
+        serializeDataIntoJSON(levels: [Level()], path: .allLevels)
     }
     
     static func removeLevel(level: Level) {
@@ -281,5 +313,14 @@ class Level {
     
     static func removeLevel(index: Int) {
         loadedLevels?.remove(at: index)
+        serializeDataIntoJSON(levels: [Level()], path: .allLevels)
     }
 }
+
+extension Level {
+    enum Path {
+        case allLevels
+        case level
+    }
+}
+
