@@ -74,7 +74,7 @@ class GameView: UIView {
         })
         
         // Draw arrow
-        if scene.isReadyToLaunch, let context = UIGraphicsGetCurrentContext(), let image = UIImage(named: "arrow2") {
+        if scene.isReadyToLaunch, let context = UIGraphicsGetCurrentContext(), let image = UIImage(named: "arrow3") {
             context.saveGState()
             
             // Use coin center

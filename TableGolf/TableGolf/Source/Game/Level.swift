@@ -207,16 +207,6 @@ class Level {
                 return level
                 
             })
-            // checks whether we had any levels in JSON file
-            /*if levels.count == 0 {
-             loadedLevels = nil
-             } else {
-             if let loadedLevels = self.loadedLevels {
-             let newLevels = loadedLevels + levels
-             print(newLevels.count)
-             self.loadedLevels = newLevels
-             }
-             }*/
             return levels
             
         }

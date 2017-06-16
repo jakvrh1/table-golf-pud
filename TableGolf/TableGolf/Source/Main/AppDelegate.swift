@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        // Save level from email to app
+        // Save level from email to .libraryDirectory
         if let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first, let data =  try? Data(contentsOf: url) {
             let path = dir.appendingPathComponent("sharedLevel.cdl")
             try? data.write(to: path)
