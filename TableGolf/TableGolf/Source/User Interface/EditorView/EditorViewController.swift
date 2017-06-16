@@ -293,7 +293,7 @@ class EditorViewController: BaseViewController {
             topObjectMenuPanelTopLayoutConstraint?.constant = 0
             bottomObjectMenuPanelBottomLayoutConstraint?.constant = 0
         }
-        
+ 
         UIView.animate(withDuration: animated ? 0.3 : 0) {
             self.view.layoutIfNeeded()
         }

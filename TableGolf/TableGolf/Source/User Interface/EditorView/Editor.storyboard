@@ -27,10 +27,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwZ-DU-qzb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oof-jE-NGT">
-                                        <rect key="frame" x="0.0" y="-80" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="-60" width="375" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFa-X8-J4b">
                                                 <rect key="frame" x="230" y="25" width="45" height="30"/>
@@ -115,7 +115,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oof-jE-NGT" firstAttribute="top" secondItem="WNs-65-jF4" secondAttribute="bottom" constant="-100" id="BRg-Jr-E1G"/>
+                            <constraint firstItem="oof-jE-NGT" firstAttribute="top" secondItem="WNs-65-jF4" secondAttribute="bottom" constant="-80" id="BRg-Jr-E1G"/>
                             <constraint firstItem="7eO-GO-dEm" firstAttribute="leading" secondItem="1ra-kT-eYW" secondAttribute="leading" id="DzO-kG-Pwx"/>
                             <constraint firstAttribute="trailing" secondItem="k9O-KB-lW4" secondAttribute="trailing" id="IuR-oe-7V0"/>
                             <constraint firstAttribute="trailing" secondItem="zqy-NX-cCC" secondAttribute="trailing" id="TbO-lB-SV3"/>
