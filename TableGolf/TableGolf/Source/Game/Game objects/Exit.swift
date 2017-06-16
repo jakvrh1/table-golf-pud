@@ -10,4 +10,8 @@ import UIKit
 
 class Exit: Circle {
 
+    func duplicate() -> Exit {
+        return Exit(withCenter: self.center, andRadius: self.radius)
+    }
+    
 }

@@ -11,6 +11,8 @@ import UIKit
 class GameView: UIView {
     var scene: GameScene?
     var cameraMode: CameraMode = .fullScene
+
+    var highlightedObject: Circle? = nil
     
     private var scenePosition: ScenePosition = ScenePosition(offset: CGPoint.zero, center: CGPoint.zero, scale: 1.0)
     
@@ -43,18 +45,31 @@ class GameView: UIView {
         fillCircle(circle: scene.table)
         
         // Draw exits
-        UIColor.black.setFill()
         scene.exits.forEach({ exit in
+            if exit === highlightedObject {
+                UIColor.gray.setFill()
+            } else {
+                UIColor.black.setFill()
+            }
             fillCircle(circle: exit)
         })
         
         // Draw coin
-        UIColor.yellow.setFill()
+        
+        if scene.coin === highlightedObject {
+            UIColor.gray.setFill()
+        } else {
+            UIColor.yellow.setFill()
+        }
         fillCircle(circle: scene.coin)
         
         // Draw obstacles
-        UIColor.blue.setFill()
         scene.obstacles.forEach({ obstacle in
+            if obstacle === highlightedObject {
+                UIColor.gray.setFill()
+            } else {
+                UIColor.blue.setFill()
+            }
             fillCircle(circle: obstacle)
         })
         
@@ -89,6 +104,15 @@ class GameView: UIView {
         let path = UIBezierPath(ovalIn: scenePosition.frame(forCircle: circle))
         path.fill()
     }
+    
+    func convertViewToSceneCoordinates(location: CGPoint) -> CGPoint {
+        return scenePosition.backwardTransform(point: location)
+    }
+    
+    func convertViewToSceneRadius(radius: CGFloat) -> CGFloat {
+        return scenePosition.backwardTransform(radius: radius)
+    }
+    
 }
 
 // MARK: - Screen Position
@@ -113,8 +137,17 @@ fileprivate extension GameView {
                            y: offset.y + (point.y-center.y) * scale)
         }
         
+        func backwardTransform(point: CGPoint) -> CGPoint {
+            return CGPoint(x: (point.x - offset.x)/scale + center.x,
+                           y: (point.y - offset.y)/scale + center.y)
+        }
+        
         func transform(radius: CGFloat) -> CGFloat {
             return radius*scale
+        }
+        
+        func backwardTransform(radius: CGFloat) -> CGFloat {
+            return radius/scale
         }
     }
 }

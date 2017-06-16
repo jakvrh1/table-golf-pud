@@ -114,57 +114,79 @@ class GameScene: GameObject {
         delegate?.gameSceneNeedsRefresh(sender: self)
     }
     
+    // Returns object within the mouse radius
+    func firstObject(at location: CGPoint, radius: CGFloat) -> Circle? {
+        let objects: [Circle] = (obstacles as [Circle]) + (exits as [Circle]) + ([coin] as [Circle])
+        
+        for object in objects {
+            if object.radius + radius >= PointTools.length(PointTools.substract(object.center, location)) {
+                return object
+            }
+        }
+        return nil
+    }
+    
+    func removeObject(object: Circle) {
+        var index: Int = 0
+        
+        for element in obstacles {
+            if element === object {
+                obstacles.remove(at: index)
+                return
+            }
+            index += 1
+        }
+        
+        index = 0
+        for element in exits {
+            if element === object {
+                exits.remove(at: index)
+                return
+            }
+            index += 1
+        }
+    }
+    
+    func constructScene(level: Level, override: Bool) -> Level{
+        if override {
+            Level.removeLevel(level: level)
+            level.obstacles = obstacles
+            level.exits = exits
+            level.coin  = coin
+            level.table = table
+            return level
+        } else {
+            let level = Level()
+           
+            level.obstacles = obstacles
+            level.exits = exits
+            level.coin = coin
+            level.table = table
+            
+            return level
+        }
+    }
+    
 // MARK: Initialization
  
-    convenience init(withTutorialType tutorialType: TutorialType) {
+    convenience init(level: Level) {
         self.init()
         
-        switch tutorialType {
-        case .basic:
-            // Object positions
-            table = Table(withCenter: CGPoint.zero, andRadius: 100)
-            coin = Coin(withCenter: CGPoint(x: 90, y: 0), andRadius: 4)
-            exits = [Exit(withCenter: CGPoint(x: -90, y: 0), andRadius: 10)]
-            
-            obstacles = [
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 12),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 10),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 9)
-            ]
-        case .lvl1:
-            // Object positions
-            table = Table(withCenter: CGPoint.zero, andRadius: 100)
-            coin = Coin(withCenter: CGPoint(x: 0, y: 0), andRadius: 4)
-            exits = [Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.6, radius: table.radius*0.9), andRadius: 10),
-            Exit(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.1, radius: table.radius*0.3), andRadius: 5)]
-            
-            obstacles = [
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.0, radius: table.radius*0.7), andRadius: 8),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.3, radius: table.radius*0.7), andRadius: 20),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.5, radius: table.radius*0.2), andRadius: 2),
-                Obstacle(withCenter: PointTools.cartesian(angle: CGFloat.pi*2 * 0.8, radius: table.radius*0.5), andRadius: 12)
-            ]
-        }
+        table = level.table.duplicate()
+        coin = level.coin.duplicate()
+        exits = level.exits.map { $0.duplicate() }
+        obstacles = level.obstacles.map { $0.duplicate() }
         
         coin.delegate = self
     }
-}
-
-// MARK: - TutorialType
-
-extension GameScene {
-    enum TutorialType {
-        case basic
-        case lvl1
-    }
-}
-
-// MARK: Coin delegate
-
-extension GameScene: CoinDelegate {
     
-    private func isCoinOnTable() -> Bool {
+    convenience init(newLevel: Bool) {
+        self.init()
+        table = Table(withCenter: CGPoint.zero, andRadius: 100)
+        coin = Coin(withCenter: CGPoint.zero, andRadius: 4)
+    }
+    
+    func isCoinOnTable() -> Bool {
         let length = PointTools.length(CGPoint(x: table.center.x - coin.center.x, y: table.center.y - coin.center.y))
         let maxLength = table.radius
         
@@ -175,7 +197,7 @@ extension GameScene: CoinDelegate {
         return true
     }
     
-    private func isCoinInExit() -> Bool {
+    func isCoinInExit() -> Bool {
         for exit in exits {
             let length = PointTools.length(CGPoint(x: exit.center.x - coin.center.x, y: exit.center.y - coin.center.y))
             let maxLength = exit.radius
@@ -187,7 +209,11 @@ extension GameScene: CoinDelegate {
         
         return false
     }
-    
+}
+
+// MARK: Coin delegate
+
+extension GameScene: CoinDelegate {
     func coinDidStopMoving(coin: Coin) {
         if !isCoinOnTable() {
             delegate?.gameSceneDidFinishWithLose(sender: self)

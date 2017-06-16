@@ -9,5 +9,9 @@
 import UIKit
 
 class Table: Circle {
-
+    
+    func duplicate() -> Table {
+        return Table(withCenter: self.center, andRadius: self.radius)
+    }
+    
 }
