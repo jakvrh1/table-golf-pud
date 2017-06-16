@@ -43,7 +43,7 @@ class AlertView {
         controller.present(alertController, animated: true, completion: nil)
     }
     
-    static func showOverride(title: String?, message: String?, inController controller: UIViewController, completion: @escaping (_ text: Bool)->Void) {
+    static func showConfirmation(title: String?, message: String?, inController controller: UIViewController, completion: @escaping (_ text: Bool)->Void) {
         let alertController: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -56,4 +56,5 @@ class AlertView {
         
         controller.present(alertController, animated: true, completion: nil)
     }
+    
 }

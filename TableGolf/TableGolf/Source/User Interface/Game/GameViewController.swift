@@ -17,7 +17,7 @@ class GameViewController: BaseViewController {
     private var arrowCurrentLocation: CGPoint? = nil
     private var scaleFactor: CGFloat = 1.0
     
-    public var level: Level?
+    var level: Level?
     private var cameraModeFullScene: Bool = false
     
     // MARK: Game initialization

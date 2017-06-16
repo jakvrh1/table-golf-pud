@@ -31,13 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-       // Level.deserializeDataFromJSON(url: url)
-        
+        // Save level from email to app
         if let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first, let data =  try? Data(contentsOf: url) {
-            
             let path = dir.appendingPathComponent("sharedLevel.cdl")
             try? data.write(to: path)
-            
         }
         
         return true
@@ -54,7 +51,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

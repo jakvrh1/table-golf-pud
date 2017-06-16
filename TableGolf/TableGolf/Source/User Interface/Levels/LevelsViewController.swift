@@ -28,10 +28,10 @@ class LevelsViewController: BaseViewController {
         Level.deserializeDataFromJSON()
         levels = Level.allLevels
         
-        for lvl in levels {
+        /*for lvl in levels {
             print(lvl.id)
             print("\n")
-        }
+        }*/
         
         setUpTableView()
     }
@@ -51,7 +51,7 @@ class LevelsViewController: BaseViewController {
 //MARK: UITableView properties
 
 extension LevelsViewController: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return levels.count
     }
     

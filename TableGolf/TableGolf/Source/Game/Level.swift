@@ -242,7 +242,6 @@ class Level {
         }
     }
     
-    
     static func deserializeDataFromJSON() {
         if let data = try? Data(contentsOf: levelsFileURL!) {
             guard let object = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String:Any]] else {
@@ -286,11 +285,6 @@ class Level {
                 loadedLevels = levels
             }
         }
-    }
-    
-    static func levelData(level: Level) {
-        
-        
     }
     
     //MARK: Storing options

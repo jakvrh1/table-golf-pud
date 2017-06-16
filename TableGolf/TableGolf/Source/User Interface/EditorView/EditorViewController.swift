@@ -84,10 +84,22 @@ class EditorViewController: BaseViewController {
         gameView?.cameraMode = .fullScene
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSave))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel))
         
     }
     
 //MARK: Constraints, buttons, gestures
+    
+    @objc func onCancel() {
+        
+        AlertView.showConfirmation(title: "Are you sure?", message: "This will delegte all your progress", inController: self) { didAccept in
+            if didAccept {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+        
+    }
     
     func onSave() {
         guard let scene = self.scene else {
@@ -117,7 +129,7 @@ class EditorViewController: BaseViewController {
             
             if Level.doesLevelWithIDExist(id: self.level?.id) {
                 // Let user decide if he wants to override level
-                AlertView.showOverride(title: "Override", message: "", inController: self, completion: { override in
+                AlertView.showConfirmation(title: "Override", message: "", inController: self, completion: { override in
                     self.saveCreatedLevel(level: level, levelName: name, override: override)
                 })
             } else {
@@ -145,14 +157,18 @@ class EditorViewController: BaseViewController {
     
     
     @objc private func onTap(sender: UIGestureRecognizer) {
-        print("HERE1")
         // disable onTap when object is selected
         if mode == .scene {
-            setMode(mode: .object, animated: true)
+            
             if let gameView = gameView, let scene = scene {
                 
                 selectedObject = scene.firstObject(at: gameView.convertViewToSceneCoordinates(location: sender.location(in: gameView)),
                                                     radius: gameView.convertViewToSceneRadius(radius: 20.0))
+                if selectedObject != nil {
+                    setMode(mode: .object, animated: true)
+                    gameView.highlightedObject = selectedObject
+                }
+                
                 gameView.highlightedObject = selectedObject
             }
             gameView?.setNeedsDisplay()

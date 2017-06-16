@@ -23,16 +23,12 @@ class MenuViewController: BaseViewController {
         super.viewDidLoad()
         selectedLevel = Level.allLevels.first
         label.text = Level.allLevels.first?.name ?? "No levels"
-        
-        
-      
-        
     }
     
+    
+    // If file sharedLevel.cdl exists save it to Level.allLevels
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
         if let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first?.path {
             let path = dir + "/sharedLevel.cdl"
             
@@ -83,15 +79,15 @@ class MenuViewController: BaseViewController {
     
     @IBAction func shareLevel(_ sender: Any) {
         if !MFMailComposeViewController.canSendMail() {
-            print("NOPE")
+            print("Email not available at the moment!")
             return
         }
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         
-        // Configure the fields of the interface.
+        // Configure the fields of the interface
         composeVC.setToRecipients(["jakvrh1@gmail.com"])
-        composeVC.setSubject("Table Golf level")
+        composeVC.setSubject("Table Golf level \(selectedLevel?.name ?? "" )")
         composeVC.setMessageBody("Try out my level!", isHTML: false)
         
         if let level = selectedLevel {
@@ -100,14 +96,10 @@ class MenuViewController: BaseViewController {
             composeVC.addAttachmentData(Level.levelData(level: level), mimeType: "cdl", fileName: "Level.cdl")
         }
         
-        //Level.levelData(level: <#T##Level#>)
-        
-        // Present the view controller modally.
+        // Present the view controller modally
         self.present(composeVC, animated: true, completion: nil)
     }
-    
-    
-    
+  
 }
 
 extension MenuViewController: MFMailComposeViewControllerDelegate {
@@ -131,4 +123,5 @@ extension MenuViewController: EditorDelegate {
         self.selectedLevel = level
         self.label.text = level.name
     }
+    
 }
